@@ -1,11 +1,7 @@
 ---
-import { whatsappUrl } from '../config';
-import Button from './Button.astro';
 import Icon from './Icon.astro';
 import Section from './Section.astro';
 import SectionHeader from './SectionHeader.astro';
-
-const ctaUrl = whatsappUrl('Hola, tengo una consulta antes de contratar el servicio');
 
 // Las respuestas admiten HTML (enlaces). Los [VERIFICAR] son datos por confirmar.
 const faqs = [
@@ -61,17 +57,13 @@ const faqs = [
 			faqs.map((faq) => (
 				<details data-reveal class="faq border-t border-border">
 					<summary class="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-4 font-heading font-semibold text-primary">
-						<h3 class="text-body lg:text-h3">{faq.q}</h3>
+						<span class="text-body lg:text-h3">{faq.q}</span>
 						<Icon name="chevron-down" class="faq-chevron text-primary-soft" />
 					</summary>
 					<p class="faq-answer max-w-2xl pb-5 text-muted-foreground" set:html={faq.a} />
 				</details>
 			))
 		}
-	</div>
-
-	<div data-reveal class="mt-10 flex flex-col items-start gap-3 md:items-center lg:mt-14">
-		<Button href={ctaUrl} whatsapp class="w-full sm:w-auto">Pregúntanos por WhatsApp</Button>
 	</div>
 </Section>
 
