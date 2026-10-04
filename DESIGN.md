@@ -81,7 +81,7 @@ Las secciones alternan `background` y `card`. El panel del hero y el CTA final s
 | Nota o aviso | `small` | igual | `muted-foreground` |
 | Precio (tarjeta de precios) | `h1` | igual | Lexend 700, `whitespace-nowrap` |
 | Rótulo de lista dentro de un bloque (`<h4>`) | `.eyebrow` | igual | «Incluye» en `primary-soft`; «No incluye» en `muted-foreground` |
-| Pregunta del acordeón (`<h3>`) | `body` | `h3` desde `lg` | Lexend 600 |
+| Pregunta del acordeón (texto del `<summary>`, sin encabezado) | `body` | `h3` desde `lg` | Lexend 600 |
 
 - Separaciones: antetítulo → título `mt-3`; H2 → bajada `mt-3` (H1 → bajada `mt-4`);
   H3 → texto `mt-1`.
@@ -201,7 +201,8 @@ Un solo patrón, a cargo de `src/scripts/reveal.ts` (cargado en `Layout.astro`).
 - Solo tokens de `@theme`; ningún color, tamaño o radio suelto en los componentes.
 - Texto normal sobre fondo claro: `foreground` o `muted-foreground`. Títulos en `primary`.
 - Ámbar (`accent`) solo en botones primarios y en el subrayado de los enlaces del navbar.
-- El foco visible es global (anillo de 3px `ring`); no se quita ni se redefine.
+- El foco visible es global (anillo de 3px `ring`); no se quita ni se redefine. Sobre
+  `.showroom` el anillo pasa a `on-primary`, porque el marino no contrasta con el fondo.
 - Área táctil mínima de 44 × 44px y al menos 8px entre controles.
 
 ## 11. Verificación

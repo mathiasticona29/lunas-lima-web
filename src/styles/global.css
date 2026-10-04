@@ -153,6 +153,11 @@
       linear-gradient(to bottom, var(--color-primary), var(--color-primary-deep));
   }
 
+  /* Sobre marino el anillo de foco va en claro: el marino del token `ring` no se vería. */
+  .showroom :focus-visible {
+    outline-color: var(--color-on-primary);
+  }
+
   /* Mockup ilustrativo (conversación de ejemplo): marco sin sombra, siempre rotulado. */
   .mockup {
     background-color: var(--color-muted);
