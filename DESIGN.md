@@ -1,0 +1,166 @@
+# DESIGN.md — Sistema visual de la landing
+
+Reglas para que todas las secciones se sientan parte del mismo sistema. Los valores
+viven como tokens en `src/styles/global.css` (`@theme`); aquí se dice cuál usar y cuándo.
+Si una sección necesita algo que no está aquí, primero se añade la regla y después se usa.
+
+## 1. Componentes obligatorios
+
+| Componente | Uso |
+|---|---|
+| `Section.astro` | Envoltorio de toda sección: fondo, padding vertical, contenedor y `scroll-mt-20`. |
+| `SectionHeader.astro` | Antetítulo + título + bajada. No se escriben `<h2>` de sección a mano. |
+| `Button.astro` | Todo enlace con forma de botón. No se usan las clases `.btn-*` directamente. |
+| `Icon.astro` | Todo ícono de línea. Los trazos nuevos se añaden a su mapa `paths`. |
+
+```astro
+<Section id="precios" tone="card" aria-labelledby="precios-titulo">
+	<SectionHeader eyebrow="Precios" title="…" lead="…" titleId="precios-titulo" />
+	<div class="mt-10 lg:mt-14">…</div>
+	<div data-reveal class="mt-10 flex flex-col items-start gap-3 md:items-center lg:mt-14">
+		<Button href={whatsappUrl('…')} whatsapp class="w-full sm:w-auto">…</Button>
+	</div>
+</Section>
+```
+
+## 2. Sección: padding, contenedor y ritmo interno
+
+- **Padding vertical:** `py-section` (4rem) y `lg:py-section-lg` (6rem). Lo pone `Section`;
+  no se añade padding vertical extra a la sección.
+- **Contenedor:** `container-page` (70rem; gutter 1.25rem, 2rem desde `md`). Es el de todas
+  las secciones y del footer. El ancho `wide` (100rem; gutter 4rem desde 1440px)
+  es solo del navbar y del hero, que arma su propia columna con ese ancho.
+- **Ritmo interno:** cabecera → contenido → CTA separados por `mt-10 lg:mt-14`.
+  Dentro de un bloque: `gap-8` entre columnas o ítems, `gap-3` entre un botón y su nota.
+- **Alineación:** en móvil todo a la izquierda. Desde `md`, cabecera, CTA de cierre y
+  footer van centrados. Como el contenedor de las secciones es más angosto que el del
+  navbar, una cabecera alineada a la izquierda en escritorio se ve desfasada del logo.
+- **Ancho de lectura:** párrafos sueltos con `max-w-2xl` como máximo; texto dentro de
+  columnas con `max-w-xs`.
+- `flush` (sin padding ni contenedor) es solo para el hero.
+
+## 3. Ritmo de fondos
+
+Las secciones alternan `background` y `card`. Solo hay una banda marina.
+
+| Sección | `tone` |
+|---|---|
+| Hero | `background` |
+| Cómo funciona | `card` |
+| Requisitos | `background` |
+| Precios | `card` |
+| FAQ | `background` |
+| CTA final | `primary` |
+| Footer | `muted` (no usa `Section`) |
+
+- El tono `card` trae su `border-y` de 1px (`border`); así cada frontera entre dos tonos
+  claros tiene exactamente una línea. Los demás tonos no llevan borde.
+- Sobre `primary` el texto va en `on-primary` y el botón sigue siendo ámbar.
+- `muted` como fondo de sección está reservado al footer; dentro de las secciones se usa
+  para superficies pequeñas (marcadores de ícono, pista del slider, hover del botón secundario).
+
+## 4. Escala de títulos
+
+| Pieza | Móvil | Escritorio | Estilo |
+|---|---|---|---|
+| Antetítulo (`.eyebrow`) | `small` 0.875rem | igual | Source Sans 600, mayúsculas, tracking 0.025em, `primary-soft` |
+| H1 (solo hero) | `h1` 2.125rem | `h1-lg` 3.25rem desde `xl`; `h1-xl` 3.75rem desde `2xl` (`h2-lg` si la pantalla es baja) | Lexend 700, `text-balance` |
+| H2 de sección | `h2` 1.625rem | `h2-lg` 2.25rem desde `lg` | Lexend 700, `text-balance` |
+| H3 (ítem, tarjeta, paso) | `h3` 1.25rem | `h3-lg` 1.375rem desde `lg` | Lexend 600 |
+| Bajada | `body` 1.0625rem | `body-lg` 1.125rem desde `lg` | `muted-foreground`, `max-w-2xl` |
+| Bajada del hero | `body` | `body-lg`; `lead` 1.25rem desde `2xl` | `muted-foreground`, `max-w-lg` (`max-w-xl` desde `2xl`) |
+| Nota o aviso | `small` | igual | `muted-foreground` |
+
+- Separaciones: antetítulo → título `mt-3`; H2 → bajada `mt-3` (H1 → bajada `mt-4`);
+  H3 → texto `mt-1`.
+- Un solo H1 por página. Cada sección tiene un H2 y lo enlaza con `aria-labelledby`.
+- El antetítulo nombra la sección en 1 a 3 palabras; el H2 dice el beneficio.
+
+## 5. Botones
+
+Siempre con `Button.astro`.
+
+| Variante | Aspecto | Uso |
+|---|---|---|
+| `primary` | Fondo `accent`, texto `on-accent`; hover `accent-hover` | La acción principal. Una por bloque visible. |
+| `secondary` | Borde 1px `primary`, texto `primary`; hover fondo `muted` | Acción de apoyo junto a un primario (anclas internas). |
+
+- Tamaño `md`: alto mínimo 3rem, padding 0.75rem × 1.5rem, Lexend 600. `sm` (2.75rem,
+  0.5rem × 1rem) solo en el navbar.
+- Radio `rounded-button`. Al presionar, escala 0.98; transición de 180 ms `ease-out-soft`.
+- `whatsapp`: añade el ícono, abre en pestaña nueva, avisa a lectores de pantalla y pone
+  `data-wa-cta` (oculta el botón flotante mientras el CTA está en pantalla). La URL sale
+  siempre de `whatsappUrl()` en `src/config.ts`.
+- En móvil el CTA de cierre de sección ocupa todo el ancho (`w-full sm:w-auto`).
+- Dos botones juntos: `gap-3`, primario primero. El verde de WhatsApp es solo del botón
+  flotante; los CTA de las secciones son ámbar.
+
+## 6. Tarjetas
+
+- Clase `.card`: fondo `card`, borde 1px `border`, `rounded-card`, `shadow-card`,
+  padding 1.5rem (`p-4` en tarjetas compactas, como la del slider).
+- `.card-featured` (borde `primary`) solo para la tarjeta destacada de precios.
+- Las tarjetas van sobre fondo `background` o sobre el panel marino. En una sección
+  `card` el contenido no se mete en tarjetas: se separa con espacio o con líneas `border`.
+- Sin tarjetas dentro de tarjetas. Sin hover de elevación en tarjetas que no son clicables.
+
+## 7. Íconos
+
+Siempre con `Icon.astro`: de línea, grilla de 24, sin relleno, puntas y uniones redondas.
+
+| `size` | Medida | Trazo | Uso |
+|---|---|---|---|
+| `xs` | 16px | 2 | Dentro de texto `small` (pistas, notas) |
+| `sm` | 24px | 1.75 | Controles e íconos en línea con texto |
+| `md` | 28px | 1.75 | Dentro de un marcador circular |
+| `lg` | 32px | 1.75 | Ícono destacado sin marcador (señales de confianza) |
+
+- Color: `text-primary-soft` para íconos de contenido; `currentColor` en controles.
+- Marcador: círculo `size-14`, fondo `muted`, ícono `md`. Número de paso: círculo `size-6`
+  `primary` con texto `on-primary`, montado arriba a la derecha.
+- Los íconos decorativos llevan `aria-hidden` (lo pone el componente). Sin emojis.
+- El ícono de WhatsApp (`WhatsAppIcon.astro`) es el único relleno.
+
+## 8. Radios y sombras
+
+| Token | Valor | Uso |
+|---|---|---|
+| `rounded-button` | 0.75rem | Botones y controles |
+| `rounded-card` | 1rem | Tarjetas |
+| `rounded-panel` | 1.5rem | Paneles grandes a sangre (panel del auto) |
+| `rounded-full` | — | Marcadores, insignias, botón flotante |
+
+- Una sola sombra: `shadow-card`. La llevan las tarjetas y el botón flotante; nada más.
+  Los botones no tienen sombra. No se añaden sombras nuevas sin crear antes el token.
+
+## 9. Animación al hacer scroll
+
+Un solo patrón, a cargo de `src/scripts/reveal.ts` (cargado en `Layout.astro`).
+
+- Se marca con `data-reveal` cada bloque que entra: las líneas de la cabecera (las marca
+  `SectionHeader`), cada ítem de una lista o grilla y el bloque del CTA.
+- Movimiento: opacidad 0 → 1 y desplazamiento de 16px hacia arriba, 0,5 s, `ease-out-soft`.
+- Se dispara una sola vez, cuando el 30 % del elemento está en pantalla. Los elementos que
+  entran a la vez se escalonan 80 ms en orden de documento; no hay que configurar retrasos.
+- Sin JS o con `prefers-reduced-motion`, todo queda visible desde el inicio.
+- Excepción, solo el hero: entra al cargar con `data-reveal-load` y `--reveal-i` (posición
+  en el escalonado), en CSS puro y con el mismo movimiento, para que el H1 pinte sin
+  esperar al JS. Lo que está bajo el pliegue usa siempre `data-reveal`.
+- No se escribe un script de aparición por sección ni se anima `width`, `height` o
+  `margin`. Sin parallax ni animaciones en bucle; la única excepción es el vaivén del auto.
+- Transiciones de estado (hover, foco, presión): 180–200 ms `ease-out-soft`.
+
+## 10. Color y accesibilidad
+
+- Solo tokens de `@theme`; ningún color, tamaño o radio suelto en los componentes.
+- Texto normal sobre fondo claro: `foreground` o `muted-foreground`. Títulos en `primary`.
+- Ámbar (`accent`) solo en botones primarios y en el subrayado de los enlaces del navbar.
+- El foco visible es global (anillo de 3px `ring`); no se quita ni se redefine.
+- Área táctil mínima de 44 × 44px y al menos 8px entre controles.
+
+## 11. Verificación
+
+Capturar en 375, 768 y 1440px. El hero, además, en 1920px: su alto tiene tope
+(`clamp(40rem, 100svh, 54rem)` desde `lg`) y la sección siguiente debe asomar.
+Revisarlo también en 1280×720: con menos de 52rem de alto (variante `tall:`) el hero
+usa título y espaciado compactos para que el texto no quede bajo el pliegue.

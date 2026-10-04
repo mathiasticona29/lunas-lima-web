@@ -1,0 +1,35 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'section'> {
+	/** Fondo. Alternar background y card; primary solo para el CTA final (ver DESIGN.md). */
+	tone?: 'background' | 'card' | 'primary';
+	/** wide (100rem, el ancho del navbar) solo si la sección debe alinear con el logo. */
+	container?: 'page' | 'wide';
+	/** Sin padding vertical ni contenedor: la sección arma su propio layout (hero). */
+	flush?: boolean;
+}
+
+const { tone = 'background', container = 'page', flush = false, class: className, ...rest } = Astro.props;
+
+const tones = {
+	background: 'bg-background',
+	card: 'border-y border-border bg-card',
+	primary: 'bg-primary text-on-primary',
+};
+---
+
+<section
+	class:list={['scroll-mt-20', tones[tone], !flush && 'py-section lg:py-section-lg', className]}
+	{...rest}
+>
+	{
+		flush ? (
+			<slot />
+		) : (
+			<div class:list={['container-page', container === 'wide' && 'container-wide']}>
+				<slot />
+			</div>
+		)
+	}
+</section>

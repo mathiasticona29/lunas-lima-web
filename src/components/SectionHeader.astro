@@ -1,0 +1,55 @@
+---
+interface Props {
+	eyebrow?: string;
+	title: string;
+	/** Bajada: una o dos líneas bajo el título. */
+	lead?: string;
+	/** 1 solo en el hero. */
+	level?: 1 | 2;
+	/** center centra desde md; en móvil siempre va a la izquierda. */
+	align?: 'left' | 'center';
+	/** id del título, para el `aria-labelledby` de la sección. */
+	titleId?: string;
+	class?: string;
+}
+
+const { eyebrow, title, lead, level = 2, align = 'center', titleId, class: className } = Astro.props;
+
+const Title = level === 1 ? 'h1' : 'h2';
+const centered = align === 'center';
+
+// El hero (nivel 1) entra al cargar, con CSS; el resto, al hacer scroll (ver DESIGN.md).
+const reveal = (index: number) =>
+	level === 1 ? { 'data-reveal-load': true, style: `--reveal-i: ${index}` } : { 'data-reveal': true };
+---
+
+<div class:list={[centered && 'md:text-center', className]}>
+	{eyebrow && <p {...reveal(0)} class="eyebrow">{eyebrow}</p>}
+	<Title
+		{...reveal(1)}
+		id={titleId}
+		class:list={[
+			'font-bold text-balance',
+			eyebrow && 'mt-3',
+			level === 1
+				? 'text-h1 xl:text-h2-lg xl:tall:text-h1-lg 2xl:tall:text-h1-xl'
+				: 'text-h2 lg:text-h2-lg',
+		]}
+	>
+		{title}
+	</Title>
+	{
+		lead && (
+			<p
+				{...reveal(2)}
+				class:list={[
+					'text-muted-foreground',
+					level === 1 ? 'mt-4 max-w-lg 2xl:tall:max-w-xl 2xl:tall:text-lead' : 'mt-3 max-w-2xl',
+					centered && 'md:mx-auto',
+				]}
+			>
+				{lead}
+			</p>
+		)
+	}
+</div>

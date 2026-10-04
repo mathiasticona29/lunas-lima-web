@@ -1,17 +1,18 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import ComoFunciona from '../components/ComoFunciona.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout
+	title="Gestión de citas para permiso de lunas polarizadas en Lima"
+	description="Servicio privado: gestionamos tu cita para el permiso de lunas polarizadas en Lima y te orientamos para el día del trámite. Atención por WhatsApp."
+>
+	<Hero />
+	<ComoFunciona />
+	<!-- Anclas del navbar: secciones vacías hasta que se construyan -->
+
+	<section id="requisitos" class="scroll-mt-20"></section>
+	<section id="precios" class="scroll-mt-20"></section>
+	<section id="faq" class="scroll-mt-20"></section>
+</Layout>

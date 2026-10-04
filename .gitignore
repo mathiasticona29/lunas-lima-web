@@ -22,3 +22,9 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# modelo 3D original sin comprimir
+auto-original.glb
+
+# capturas y snapshots del MCP de Playwright
+.playwright-mcp/

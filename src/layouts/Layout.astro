@@ -1,0 +1,57 @@
+---
+import '@fontsource-variable/lexend';
+import '@fontsource-variable/source-sans-3';
+import '../styles/global.css';
+import Footer from '../components/Footer.astro';
+import Navbar from '../components/Navbar.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+
+interface Props {
+	title: string;
+	description: string;
+}
+
+const { title, description } = Astro.props;
+
+// Canonical y og:url necesitan `site` en astro.config.mjs (el dominio definitivo).
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+---
+
+<html lang="es-PE">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<title>{title}</title>
+		{canonical && <link rel="canonical" href={canonical} />}
+		<meta property="og:type" content="website" />
+		<meta property="og:locale" content="es_PE" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		{canonical && <meta property="og:url" content={canonical} />}
+		<!-- Marca que hay JS antes de pintar, para que las entradas animadas no parpadeen. -->
+		<script is:inline>
+			document.documentElement.classList.add('js');
+		</script>
+	</head>
+	<body>
+		<a
+			href="#contenido"
+			class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-button focus:bg-card focus:px-4 focus:py-2 focus:text-primary"
+		>
+			Saltar al contenido
+		</a>
+		<Navbar />
+		<main id="contenido">
+			<slot />
+		</main>
+		<Footer />
+		<WhatsAppFloat />
+		<script>
+			import '../scripts/reveal';
+		</script>
+	</body>
+</html>

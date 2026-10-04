@@ -1,0 +1,274 @@
+@import "tailwindcss";
+
+/* Pantallas con alto suficiente para el hero holgado de escritorio (ver Hero.astro). */
+@custom-variant tall (@media (min-height: 52rem));
+
+@theme {
+  /* Color */
+  --color-primary: #12284c;
+  --color-primary-soft: #1e3a8a;
+  --color-primary-deep: #0a1830;
+  --color-on-primary: #ffffff;
+  --color-accent: #f59e0b;
+  --color-accent-hover: #d97706;
+  --color-on-accent: #12284c;
+  --color-background: #f8fafc;
+  --color-card: #ffffff;
+  --color-muted: #e9eef5;
+  --color-foreground: #0f172a;
+  --color-muted-foreground: #475569;
+  --color-border: #cbd5e1;
+  --color-ring: #1e3a8a;
+  --color-whatsapp: #128c7e;
+
+  /* Tipografía */
+  --font-heading: "Lexend Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Source Sans 3 Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --text-h1: 2.125rem;
+  --text-h1--line-height: 1.1;
+  --text-h1-lg: 3.25rem;
+  --text-h1-lg--line-height: 1.1;
+  --text-h1-xl: 3.75rem;
+  --text-h1-xl--line-height: 1.08;
+  --text-h2: 1.625rem;
+  --text-h2--line-height: 1.2;
+  --text-h2-lg: 2.25rem;
+  --text-h2-lg--line-height: 1.2;
+  --text-h3: 1.25rem;
+  --text-h3--line-height: 1.3;
+  --text-h3-lg: 1.375rem;
+  --text-h3-lg--line-height: 1.3;
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.6;
+  --text-body-lg: 1.125rem;
+  --text-body-lg--line-height: 1.6;
+  --text-lead: 1.25rem;
+  --text-lead--line-height: 1.5;
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.5;
+
+  /* Espaciado y forma (base 4px de Tailwind) */
+  --spacing-gutter: 1.25rem;
+  --spacing-gutter-lg: 2rem;
+  --spacing-gutter-xl: 4rem;
+  --spacing-section: 4rem;
+  --spacing-section-lg: 6rem;
+  --container-page: 70rem;
+  --container-wide: 100rem;
+  --radius-card: 1rem;
+  --radius-button: 0.75rem;
+  --radius-panel: 1.5rem;
+  --shadow-card: 0 1px 2px rgb(18 40 76 / 0.06), 0 8px 24px rgb(18 40 76 / 0.06);
+
+  /* Movimiento */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-heading);
+    color: var(--color-primary);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-ring);
+    outline-offset: 3px;
+  }
+
+  @media (min-width: 64rem) {
+    body {
+      font-size: var(--text-body-lg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: var(--container-page);
+    margin-inline: auto;
+    padding-inline: var(--spacing-gutter);
+  }
+
+  @media (min-width: 48rem) {
+    .container-page {
+      padding-inline: var(--spacing-gutter-lg);
+    }
+  }
+
+  /* Navbar y hero: más anchos que el resto para que el auto respire */
+  .container-wide {
+    max-width: var(--container-wide);
+  }
+
+  @media (min-width: 90rem) {
+    .container-wide {
+      padding-inline: var(--spacing-gutter-xl);
+    }
+  }
+
+  .card {
+    background-color: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    padding: 1.5rem;
+  }
+
+  /* Borde marino solo para la tarjeta de precios destacada */
+  .card-featured {
+    border-color: var(--color-primary);
+  }
+
+  /* Antetítulo de sección y del hero */
+  .eyebrow {
+    color: var(--color-primary-soft);
+    font-size: var(--text-small);
+    font-weight: 600;
+    line-height: var(--text-small--line-height);
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+  }
+
+  /* Botones: usar siempre a través de Button.astro */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 3rem;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid transparent;
+    border-radius: var(--radius-button);
+    font-family: var(--font-heading);
+    font-size: var(--text-body);
+    font-weight: 600;
+    line-height: 1.2;
+    cursor: pointer;
+    transition:
+      background-color 180ms var(--ease-out-soft),
+      transform 180ms var(--ease-out-soft);
+  }
+
+  .btn:active {
+    transform: scale(0.98);
+  }
+
+  .btn-sm {
+    min-height: 2.75rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .btn-primary {
+    background-color: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-accent-hover);
+  }
+
+  .btn-secondary {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--color-muted);
+  }
+
+  /* Íconos de línea: usar siempre a través de Icon.astro */
+  .icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    flex-shrink: 0;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .icon-xs {
+    width: 1rem;
+    height: 1rem;
+    stroke-width: 2;
+  }
+
+  .icon-md {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  .icon-lg {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn {
+      transition: none;
+    }
+
+    .btn:active {
+      transform: none;
+    }
+  }
+
+  /* Entrada al cargar ([data-reveal-load], solo el hero): CSS puro, para que el H1 pinte
+     sin esperar al JS. `--reveal-i` es la posición en el escalonado. */
+  @media (prefers-reduced-motion: no-preference) {
+    [data-reveal-load] {
+      animation: reveal-in 500ms var(--ease-out-soft) both;
+      animation-delay: calc(var(--reveal-i, 0) * 80ms);
+    }
+  }
+
+  @keyframes reveal-in {
+    from {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+  }
+
+  /* Aparición al hacer scroll ([data-reveal], src/scripts/reveal.ts). Solo se oculta si hay
+     JS y no se pidió movimiento reducido; si el script no llegara a cargar, aparece igual
+     a los 4 s. */
+  @media (prefers-reduced-motion: no-preference) {
+    html.js [data-reveal] {
+      opacity: 0;
+    }
+
+    html.js:not(.reveal-on) [data-reveal] {
+      animation: reveal-failsafe 1ms 4s forwards;
+    }
+  }
+
+  @keyframes reveal-failsafe {
+    to {
+      opacity: 1;
+    }
+  }
+}

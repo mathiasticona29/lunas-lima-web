@@ -1,0 +1,29 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import WhatsAppIcon from './WhatsAppIcon.astro';
+
+interface Props extends HTMLAttributes<'a'> {
+	href: string;
+	/** primary: ámbar, la acción principal. secondary: contorno marino. */
+	variant?: 'primary' | 'secondary';
+	/** sm solo en el navbar. */
+	size?: 'md' | 'sm';
+	/** CTA de WhatsApp: ícono, pestaña nueva, aviso para lectores de pantalla y `data-wa-cta`. */
+	whatsapp?: boolean;
+}
+
+const { href, variant = 'primary', size = 'md', whatsapp = false, class: className, ...rest } = Astro.props;
+---
+
+<a
+	href={href}
+	target={whatsapp ? '_blank' : undefined}
+	rel={whatsapp ? 'noopener noreferrer' : undefined}
+	data-wa-cta={whatsapp}
+	class:list={['btn', `btn-${variant}`, size === 'sm' && 'btn-sm', className]}
+	{...rest}
+>
+	{whatsapp && <WhatsAppIcon class="size-5" />}
+	<slot />
+	{whatsapp && <span class="sr-only"> (se abre en una pestaña nueva)</span>}
+</a>
