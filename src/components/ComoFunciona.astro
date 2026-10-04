@@ -27,11 +27,11 @@ const steps = [
 
 // Conversación ilustrativa: sin nombres, horas ni datos reales (ver DESIGN.md, Mockups).
 const chat = [
-	{ from: 'cliente', text: 'Hola, quiero gestionar mi cita para lunas polarizadas.' },
-	{ from: 'nosotros', text: 'Hola. Envíanos tus documentos y un celular de contacto.' },
-	{ from: 'cliente', text: 'Listo, ya te los envío por aquí.' },
-	{ from: 'nosotros', text: 'Recibido. Gestionamos tu usuario y tu cita.' },
-	{ from: 'nosotros', text: 'Listo, tu cita quedó agendada. Aquí va la captura.' },
+	{ from: 'cliente', text: 'Hola, quiero gestionar mi cita.' },
+	{ from: 'nosotros', text: 'Hola. Envíanos tus documentos por aquí.' },
+	{ from: 'nosotros', text: 'Creamos tu usuario. Te llegará un código al correo.' },
+	{ from: 'cliente', text: 'Ya me llegó. Te lo reenvío.' },
+	{ from: 'nosotros', text: 'Listo, tu cita quedó agendada.' },
 ] as const;
 
 const citaFields = ['Titular', 'Vehículo', 'Fecha y hora', 'Sede'];
@@ -45,8 +45,8 @@ const citaFields = ['Titular', 'Vehículo', 'Fecha y hora', 'Sede'];
 		titleId="como-funciona-titulo"
 	/>
 
-	<div class="mt-10 grid gap-10 lg:mt-14 lg:grid-cols-[1fr_26rem] lg:grid-rows-[1fr_auto_auto_1fr] lg:gap-x-16 lg:gap-y-0">
-		<ol role="list" class="mx-auto w-full max-w-md lg:col-start-1 lg:row-start-2 lg:mx-0 lg:max-w-none">
+	<div class="mt-10 grid gap-10 lg:grid-cols-[1fr_28rem] lg:grid-rows-[auto_1fr] lg:items-start lg:gap-x-16 lg:gap-y-0">
+		<ol role="list" class="mx-auto w-full max-w-md lg:col-start-1 lg:row-start-1 lg:mx-0 lg:max-w-none">
 			{
 				steps.map((step, index) => (
 					<li data-reveal class="step relative flex gap-4 pb-8 last:pb-0 lg:gap-6 lg:pb-10">
@@ -68,14 +68,14 @@ const citaFields = ['Titular', 'Vehículo', 'Fecha y hora', 'Sede'];
 			}
 		</ol>
 
-		<figure class="mockup mx-auto w-full max-w-md lg:col-start-2 lg:row-span-4 lg:row-start-1">
+		<figure class="mockup mx-auto w-full max-w-md lg:col-start-2 lg:row-span-2 lg:row-start-1">
 			<figcaption class="flex items-center justify-between gap-3 border-b border-border pb-3 text-small text-muted-foreground">
 				<span class="font-heading font-semibold text-primary">Conversación</span>
 				<span class="rounded-full border border-border bg-card px-3 py-1 font-semibold whitespace-nowrap text-foreground">
 					Ejemplo ilustrativo
 				</span>
 			</figcaption>
-			<ul role="list" class="mt-4 flex flex-col gap-3">
+			<ul role="list" class="mt-3 flex flex-col gap-2">
 				{
 					chat.map((message) => (
 						<li
@@ -93,7 +93,7 @@ const citaFields = ['Titular', 'Vehículo', 'Fecha y hora', 'Sede'];
 						<Icon name="calendar-check" class="text-primary-soft" />
 						Cita agendada
 					</p>
-					<dl class="mt-3 grid grid-cols-[auto_1fr] items-center gap-x-4 gap-y-2 border-t border-border pt-3 text-small text-muted-foreground">
+					<dl class="mt-2 grid grid-cols-[auto_1fr_auto_1fr] items-center gap-x-3 gap-y-2 border-t border-border pt-2 text-small text-muted-foreground">
 						{
 							citaFields.map((field, index) => (
 								<>
@@ -101,7 +101,7 @@ const citaFields = ['Titular', 'Vehículo', 'Fecha y hora', 'Sede'];
 									<dd>
 										<span
 											aria-hidden="true"
-											class:list={['block h-2.5 rounded-full bg-muted', index % 2 ? 'w-24' : 'w-32']}
+											class:list={['block h-2.5 rounded-full bg-muted', index % 2 ? 'w-3/4' : 'w-full']}
 										/>
 										<span class="sr-only">dato de tu cita</span>
 									</dd>
@@ -111,13 +111,13 @@ const citaFields = ['Titular', 'Vehículo', 'Fecha y hora', 'Sede'];
 					</dl>
 				</li>
 			</ul>
-			<p class="mt-4 text-small text-muted-foreground">
+			<p class="mt-3 text-small text-muted-foreground">
 				No es una conversación real ni un documento oficial. La decisión sobre el permiso es de la PNP.
 			</p>
 		</figure>
 
-		<!-- Desde lg el CTA cierra la columna de los pasos, centrada respecto al mockup (DESIGN.md §2). -->
-		<div data-reveal class="flex flex-col items-start gap-3 md:items-center lg:col-start-1 lg:row-start-3 lg:mt-10 lg:items-start">
+		<!-- Desde lg el CTA cierra la columna de los pasos, alineada arriba con el mockup (DESIGN.md §2). -->
+		<div data-reveal class="flex flex-col items-start gap-3 md:items-center lg:col-start-1 lg:row-start-2 lg:mt-10 lg:items-start">
 			<Button href={ctaUrl} whatsapp class="w-full sm:w-auto">Empieza por WhatsApp</Button>
 			<p class="text-small text-muted-foreground">Servicio privado de gestión; no somos la PNP.</p>
 		</div>

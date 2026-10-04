@@ -8,7 +8,7 @@ Si una sección necesita algo que no está aquí, primero se añade la regla y d
 
 | Componente | Uso |
 |---|---|
-| `Section.astro` | Envoltorio de toda sección: fondo, padding vertical, contenedor y `scroll-mt-20`. |
+| `Section.astro` | Envoltorio de toda sección: fondo, padding vertical, contenedor y salto por ancla (`.section-anchor`). |
 | `SectionHeader.astro` | Antetítulo + título + bajada. No se escriben `<h2>` de sección a mano. |
 | `Button.astro` | Todo enlace con forma de botón. No se usan las clases `.btn-*` directamente. |
 | `Icon.astro` | Todo ícono de línea. Los trazos nuevos se añaden a su mapa `paths`. |
@@ -16,8 +16,8 @@ Si una sección necesita algo que no está aquí, primero se añade la regla y d
 ```astro
 <Section id="precios" tone="card" aria-labelledby="precios-titulo">
 	<SectionHeader eyebrow="Precios" title="…" lead="…" titleId="precios-titulo" />
-	<div class="mt-10 lg:mt-14">…</div>
-	<div data-reveal class="mt-10 flex flex-col items-start gap-3 md:items-center lg:mt-14">
+	<div class="mt-10">…</div>
+	<div data-reveal class="mt-10 flex flex-col items-start gap-3 md:items-center">
 		<Button href={whatsappUrl('…')} whatsapp class="w-full sm:w-auto">…</Button>
 	</div>
 </Section>
@@ -25,17 +25,21 @@ Si una sección necesita algo que no está aquí, primero se añade la regla y d
 
 ## 2. Sección: padding, contenedor y ritmo interno
 
-- **Padding vertical:** `py-section` (4rem) y `lg:py-section-lg` (6rem). Lo pone `Section`;
+- **Padding vertical:** `py-section` (4rem) y `lg:py-section-lg` (5rem). Lo pone `Section`;
   no se añade padding vertical extra a la sección.
+- **Salto por ancla:** `.section-anchor` (lo pone `Section`) fija el `scroll-margin-top` para
+  que, al llegar desde el navbar, el antetítulo quede 1.5rem bajo el navbar fijo (4rem, 5rem
+  desde `lg`, más 1px de borde). Si cambia el alto del navbar o el padding, se ajusta ahí.
+  Cómo funciona, Requisitos y Precios deben caber enteras, con su CTA, en 1440×900.
 - **Contenedor:** `container-page` (70rem; gutter 1.25rem, 2rem desde `md`). Es el de todas
   las secciones y del footer. El ancho `wide` (100rem; gutter 4rem desde 1440px)
   es solo del navbar y del hero, que arma su propia columna con ese ancho.
-- **Ritmo interno:** cabecera → contenido → CTA separados por `mt-10 lg:mt-14`.
+- **Ritmo interno:** cabecera → contenido → CTA separados por `mt-10`.
   Dentro de un bloque: `gap-8` entre columnas o ítems, `gap-3` entre un botón y su nota.
 - **Alineación:** en móvil todo a la izquierda. Desde `md`, cabecera, CTA de cierre y
   footer van centrados. Única excepción: en «Cómo funciona», desde `lg`, el CTA cierra la
-  columna de los pasos (alineado a la izquierda), y ese bloque se centra en vertical
-  respecto al mockup. Como el contenedor de las secciones es más angosto que el del
+  columna de los pasos (alineado a la izquierda), y ese bloque se alinea arriba con el
+  mockup. Como el contenedor de las secciones es más angosto que el del
   navbar, una cabecera alineada a la izquierda en escritorio se ve desfasada del logo.
 - **Ancho de lectura:** párrafos sueltos con `max-w-2xl` como máximo; texto dentro de
   columnas con `max-w-xs`.
@@ -129,7 +133,8 @@ Muestra el producto real: una conversación corta que termina en la captura de l
   (`rounded-full`, fondo `card`, borde, `small` 600 en `foreground`); abajo, la nota «No es
   una conversación real ni un documento oficial…». El texto habla de cita «agendada», nunca
   de un resultado del permiso.
-- Burbujas `.bubble`: ancho máximo 85 %, `rounded-card` con la esquina de la cola en 0.25rem.
+- Burbujas `.bubble`: mensajes de una línea (dos como mucho), padding 0.5rem × 0.875rem,
+  `gap-2` entre ellas, ancho máximo 85 %, `rounded-card` con la esquina de la cola en 0.25rem.
   `.bubble-in` (nosotros): fondo `card` con borde, a la izquierda. `.bubble-out` (cliente):
   fondo `primary`, texto `on-primary`, a la derecha. Cada una lleva su emisor en `sr-only`.
 - Sin verde, avatares, horas, ticks ni nombres de personas: no debe parecer un testimonio ni

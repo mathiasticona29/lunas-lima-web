@@ -53,7 +53,7 @@
   --spacing-gutter-lg: 2rem;
   --spacing-gutter-xl: 4rem;
   --spacing-section: 4rem;
-  --spacing-section-lg: 6rem;
+  --spacing-section-lg: 5rem;
   --container-page: 70rem;
   --container-wide: 100rem;
   --radius-card: 1rem;
@@ -158,6 +158,18 @@
     outline-color: var(--color-on-primary);
   }
 
+  /* Salto por ancla: el antetítulo queda 1.5rem bajo el navbar fijo (4rem, 5rem desde lg,
+     más 1px de borde), descontando el padding superior de la sección. */
+  .section-anchor {
+    scroll-margin-top: calc(4rem + 1px + 1.5rem - var(--spacing-section));
+  }
+
+  @media (min-width: 64rem) {
+    .section-anchor {
+      scroll-margin-top: calc(5rem + 1px + 1.5rem - var(--spacing-section-lg));
+    }
+  }
+
   /* Mockup ilustrativo (conversación de ejemplo): marco sin sombra, siempre rotulado. */
   .mockup {
     background-color: var(--color-muted);
@@ -170,7 +182,7 @@
   .bubble {
     max-width: 85%;
     border-radius: var(--radius-card);
-    padding: 0.75rem 1rem;
+    padding: 0.5rem 0.875rem;
   }
 
   .bubble-in {

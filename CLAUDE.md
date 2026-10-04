@@ -70,7 +70,7 @@ a /privacidad.
 - src/components/Comparativa.astro: sección #por-que (fondo card), pares «Por tu cuenta» /
   «Con nosotros» en filas con líneas. No está en el navbar.
 - src/components/ComoFunciona.astro: sección #como-funciona (fondo background, 3 pasos en
-  `<ol>` con línea conectora vertical y, a su lado desde lg, el mockup de conversación de
+  `<ol>` con línea conectora vertical, alineados arriba, y a su lado desde lg el mockup de conversación de
   ejemplo que termina en la «captura» de la cita con barras esqueleto; ver DESIGN.md §6).
   El mockup no lleva datos, nombres ni verde, y siempre va rotulado como ejemplo.
 - src/components/Requisitos.astro (#requisitos, card), Precios.astro (#precios, background,
@@ -80,8 +80,13 @@ a /privacidad.
 - Datos confirmados: gestión S/ 30; tasa oficial S/ 71.40 (Banco de la Nación, código 08362,
   la paga el cliente antes de empezar); citas disponibles a unos 2 a 3 meses. La FAQ resume
   el art. 14 del D.S. 004-2019-IN (quién no puede obtener el permiso).
-- Los marcadores [VERIFICAR] que quedan se ven en la página (medios de pago, atención fuera
-  de Lima y reprogramación): hay que reemplazarlos antes de publicar.
+  Pago por Yape, Plin o transferencia bancaria. Cita, trámite y peritaje son solo en Lima,
+  presenciales y con el vehículo. No podemos reprogramar citas: el cliente va a informes en
+  el local de la PNP. El váucher se recomienda llevarlo el día del trámite (no es requisito).
+- Ya no quedan marcadores [VERIFICAR]; si aparece un dato sin confirmar, se vuelve a usar.
+- Anclas: `.section-anchor` (global.css, lo pone Section) deja el antetítulo 1.5rem bajo el
+  navbar. Cómo funciona, Requisitos y Precios caben enteras con su CTA en 1440×900; al
+  añadir contenido, comprobarlo haciendo clic en los enlaces del navbar.
 - /privacidad aún no existe; el footer y la FAQ ya enlazan a ella.
 - WhatsAppFloat se oculta mientras un `main [data-wa-cta]` está en pantalla;
   `<Button whatsapp>` ya pone ese atributo.

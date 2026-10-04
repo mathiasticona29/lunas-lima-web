@@ -3,7 +3,7 @@ import Icon from './Icon.astro';
 import Section from './Section.astro';
 import SectionHeader from './SectionHeader.astro';
 
-// Las respuestas admiten HTML (enlaces). Los [VERIFICAR] son datos por confirmar.
+// Las respuestas admiten HTML (enlaces).
 const faqs = [
 	{
 		q: '¿Ustedes son la PNP?',
@@ -39,19 +39,19 @@ const faqs = [
 	},
 	{
 		q: '¿Cómo pago?',
-		a: 'Aceptamos Yape. Otros medios: [VERIFICAR]. Te indicamos los datos de pago por WhatsApp.',
+		a: 'Puedes pagar la gestión por Yape, Plin o transferencia bancaria; te indicamos los datos por WhatsApp. La tasa oficial se paga aparte, directamente en el Banco de la Nación.',
 	},
 	{
 		q: '¿Qué pasa con mis datos personales?',
 		a: 'Los usamos solo para gestionar tu cita, conforme a la Ley 29733 de protección de datos personales. Detalles en nuestra <a href="/privacidad">política de privacidad</a>.',
 	},
 	{
-		q: '¿Atienden fuera de Lima?',
-		a: 'Hoy nuestro servicio está pensado para Lima. Otras ciudades: [VERIFICAR]. Escríbenos y te decimos si podemos ayudarte.',
+		q: 'Vivo fuera de Lima, ¿puedo hacer el trámite?',
+		a: 'La cita, el trámite y el peritaje son presenciales y solo en Lima, con tu vehículo. Si vives en otra ciudad, tendrás que viajar a Lima el día de tu cita. Por eso conviene elegir la fecha con calma; te orientamos antes de agendar.',
 	},
 	{
 		q: '¿Qué pasa si no puedo ir el día de mi cita?',
-		a: 'Avísanos cuanto antes por WhatsApp y te orientamos. Las opciones de reprogramación dependen de las reglas de la PNP: [VERIFICAR].',
+		a: 'Nosotros no podemos reprogramar la cita. Si no puedes asistir, debes acercarte personalmente a informes en el local de la PNP. Para evitarlo, confirma tu disponibilidad antes de agendar y te ayudamos a elegir una fecha que te convenga.',
 	},
 ];
 ---
@@ -64,7 +64,7 @@ const faqs = [
 		titleId="faq-titulo"
 	/>
 
-	<div class="mx-auto mt-10 max-w-3xl border-b border-border lg:mt-14">
+	<div class="mx-auto mt-10 max-w-3xl border-b border-border">
 		{
 			faqs.map((faq) => (
 				<details data-reveal class="faq border-t border-border">
