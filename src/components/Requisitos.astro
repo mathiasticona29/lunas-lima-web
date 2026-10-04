@@ -8,20 +8,27 @@ import SectionHeader from './SectionHeader.astro';
 const ctaUrl = whatsappUrl('Hola, quiero confirmar qué requisitos necesito para mi permiso de lunas polarizadas');
 
 const paraGestionar = [
-	{ icon: 'id-card', label: 'DNI' },
+	{
+		icon: 'id-card',
+		label: 'DNI, por ambas caras',
+		note: 'Necesitamos su fecha de emisión; viene en el mismo DNI.',
+	},
 	{ icon: 'car', label: 'Tarjeta de propiedad del vehículo' },
-	{ icon: 'mail', label: 'Correo electrónico' },
+	{
+		icon: 'wallet',
+		label: 'Váucher de pago de la tasa oficial',
+		note: 'S/ 71.40 en el Banco de la Nación, código 08362. La pagas tú y debes tenerla lista antes de empezar.',
+	},
 	{ icon: 'phone', label: 'Número de celular' },
+	{ icon: 'mail', label: 'Correo electrónico' },
 ] as const;
 
-// Los [VERIFICAR] son datos por confirmar con la norma vigente; no reemplazar por cifras inventadas.
 const paraElDia = [
+	'El vehículo',
+	'Los documentos de porte obligatorio, vigentes',
 	'Tu DNI',
 	'Tarjeta de propiedad del vehículo',
-	'El vehículo',
 	'La captura de tu cita confirmada',
-	'Comprobante de pago de la tasa oficial [VERIFICAR: si se exige y en qué momento]',
-	'Otros documentos o condiciones del vehículo [VERIFICAR: lista vigente según la norma y la PNP]',
 ];
 ---
 
@@ -36,14 +43,17 @@ const paraElDia = [
 	<div class="mt-10 grid gap-10 lg:mt-14 lg:grid-cols-2 lg:gap-0">
 		<div class="lg:pr-12">
 			<h3 data-reveal class="text-h3 font-semibold lg:text-h3-lg">Lo que nos envías para gestionar tu cita</h3>
-			<ul role="list" class="mt-6 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-4 lg:grid-cols-1 lg:gap-y-6">
+			<ul role="list" class="mt-6 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 lg:grid-cols-1 lg:gap-y-6">
 				{
 					paraGestionar.map((item) => (
 						<li data-reveal class="flex flex-col gap-3 lg:flex-row lg:items-center lg:gap-4">
 							<span class="flex size-14 shrink-0 items-center justify-center rounded-full bg-muted">
 								<Icon name={item.icon} size="md" class="text-primary-soft" />
 							</span>
-							<span class="max-w-xs font-semibold text-primary">{item.label}</span>
+							<span class="max-w-xs">
+								<span class="block font-semibold text-primary">{item.label}</span>
+								{'note' in item && <span class="mt-1 block text-small text-muted-foreground">{item.note}</span>}
+							</span>
 						</li>
 					))
 				}

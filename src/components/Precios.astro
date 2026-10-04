@@ -7,7 +7,7 @@ import SectionHeader from './SectionHeader.astro';
 
 const ctaUrl = whatsappUrl('Hola, quiero contratar la gestión de mi cita. ¿Cómo procedemos?');
 
-// Los [VERIFICAR] son datos por confirmar; no reemplazar por cifras inventadas.
+// El [VERIFICAR] de medios de pago es un dato por confirmar; no reemplazar por datos inventados.
 const incluye = [
 	'Creación de tu usuario y tu cita',
 	'Revisión de tus datos antes de agendar',
@@ -17,7 +17,7 @@ const incluye = [
 ];
 
 const noIncluye = [
-	'La tasa oficial de la PNP (S/ [VERIFICAR] monto vigente)',
+	'La tasa oficial (S/ 71.40): la pagas tú en el Banco de la Nación',
 	'La instalación del polarizado',
 	'Garantía de que el permiso sea aprobado',
 ];
@@ -37,7 +37,7 @@ const noIncluye = [
 	>
 		<div class="flex flex-col md:justify-center md:pr-8">
 			<h3 class="text-h3 font-semibold lg:text-h3-lg">Gestión de cita para permiso de lunas polarizadas</h3>
-			<p class="mt-4 font-heading text-h1 font-bold whitespace-nowrap text-primary">S/ [VERIFICAR]</p>
+			<p class="mt-4 font-heading text-h1 font-bold whitespace-nowrap text-primary">S/ 30</p>
 			<p class="mt-2 text-small text-muted-foreground">Solo por la gestión; la tasa oficial va aparte.</p>
 			<p class="mt-4 flex items-start gap-3 text-muted-foreground">
 				<Icon name="wallet" class="mt-0.5 text-primary-soft" />

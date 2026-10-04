@@ -77,8 +77,11 @@ a /privacidad.
   tarjeta destacada única), Faq.astro (#faq, card, acordeón con `<details>`) y
   CtaFinal.astro (#contacto, banda `.showroom`). Cada CTA lleva su propio mensaje
   prellenado para saber de qué sección viene el cliente.
-- Los marcadores [VERIFICAR] se ven en la página (precio, tasa, requisitos del día, plazos,
-  medios de pago, reprogramación, cobertura): hay que reemplazarlos antes de publicar.
+- Datos confirmados: gestión S/ 30; tasa oficial S/ 71.40 (Banco de la Nación, código 08362,
+  la paga el cliente antes de empezar); citas disponibles a unos 2 a 3 meses. La FAQ resume
+  el art. 14 del D.S. 004-2019-IN (quién no puede obtener el permiso).
+- Los marcadores [VERIFICAR] que quedan se ven en la página (medios de pago, atención fuera
+  de Lima y reprogramación): hay que reemplazarlos antes de publicar.
 - /privacidad aún no existe; el footer y la FAQ ya enlazan a ella.
 - WhatsAppFloat se oculta mientras un `main [data-wa-cta]` está en pantalla;
   `<Button whatsapp>` ya pone ese atributo.
