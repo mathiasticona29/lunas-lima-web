@@ -66,6 +66,17 @@
 }
 
 @layer base {
+  /* Alto real del navbar fijo: h-16 (lg:h-20) más 1px de borde inferior. */
+  :root {
+    --navbar-h: calc(4rem + 1px);
+  }
+
+  @media (min-width: 64rem) {
+    :root {
+      --navbar-h: calc(5rem + 1px);
+    }
+  }
+
   html {
     scroll-behavior: smooth;
   }
@@ -158,15 +169,23 @@
     outline-color: var(--color-on-primary);
   }
 
-  /* Salto por ancla: el antetítulo queda 1.5rem bajo el navbar fijo (4rem, 5rem desde lg,
-     más 1px de borde), descontando el padding superior de la sección. */
+  /* Salto por ancla: el borde superior de la sección queda pegado al navbar fijo. */
   .section-anchor {
-    scroll-margin-top: calc(4rem + 1px + 1.5rem - var(--spacing-section));
+    scroll-margin-top: var(--navbar-h);
   }
 
-  @media (min-width: 64rem) {
+  /* Escritorio: la sección llena la pantalla bajo el navbar, con el contenido centrado,
+     para que tras el salto no asome la sección siguiente. */
+  @media (min-width: 64rem) and (min-height: 640px) {
     .section-anchor {
-      scroll-margin-top: calc(5rem + 1px + 1.5rem - var(--spacing-section-lg));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: calc(100svh - var(--navbar-h));
+    }
+
+    .section-anchor > * {
+      width: 100%;
     }
   }
 

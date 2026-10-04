@@ -27,10 +27,15 @@ Si una sección necesita algo que no está aquí, primero se añade la regla y d
 
 - **Padding vertical:** `py-section` (4rem) y `lg:py-section-lg` (5rem). Lo pone `Section`;
   no se añade padding vertical extra a la sección.
-- **Salto por ancla:** `.section-anchor` (lo pone `Section`) fija el `scroll-margin-top` para
-  que, al llegar desde el navbar, el antetítulo quede 1.5rem bajo el navbar fijo (4rem, 5rem
-  desde `lg`, más 1px de borde). Si cambia el alto del navbar o el padding, se ajusta ahí.
-  Cómo funciona, Requisitos y Precios deben caber enteras, con su CTA, en 1440×900.
+- **Salto por ancla:** `--navbar-h` (global.css) es el alto real del navbar fijo: 4rem + 1px
+  de borde, 5rem + 1px desde `lg`. `.section-anchor` (lo pone `Section`) lo usa como
+  `scroll-margin-top`: tras el salto, el borde superior de la sección queda pegado al navbar.
+  Si cambia el alto del navbar, se actualiza `--navbar-h`.
+- **Sección a pantalla completa:** desde `lg` y con al menos 640px de alto, cada sección mide
+  como mínimo `100svh - var(--navbar-h)` y centra su contenido en vertical (flex en columna),
+  para que tras el salto no asome la sección siguiente. En móvil y tablet las secciones
+  miden lo que su contenido. El contenido de Cómo funciona, Requisitos y Precios debe caber,
+  con su CTA, en 1440×900.
 - **Contenedor:** `container-page` (70rem; gutter 1.25rem, 2rem desde `md`). Es el de todas
   las secciones y del footer. El ancho `wide` (100rem; gutter 4rem desde 1440px)
   es solo del navbar y del hero, que arma su propia columna con ese ancho.

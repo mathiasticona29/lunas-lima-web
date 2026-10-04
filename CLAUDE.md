@@ -84,9 +84,11 @@ a /privacidad.
   presenciales y con el vehículo. No podemos reprogramar citas: el cliente va a informes en
   el local de la PNP. El váucher se recomienda llevarlo el día del trámite (no es requisito).
 - Ya no quedan marcadores [VERIFICAR]; si aparece un dato sin confirmar, se vuelve a usar.
-- Anclas: `.section-anchor` (global.css, lo pone Section) deja el antetítulo 1.5rem bajo el
-  navbar. Cómo funciona, Requisitos y Precios caben enteras con su CTA en 1440×900; al
-  añadir contenido, comprobarlo haciendo clic en los enlaces del navbar.
+- Anclas: `--navbar-h` (global.css) es el alto real del navbar y `.section-anchor` (lo pone
+  Section) lo usa como scroll-margin-top. Desde lg (y 640px de alto) cada sección ocupa como
+  mínimo la pantalla bajo el navbar, con el contenido centrado, para que tras el salto no
+  asome la siguiente. El contenido de Cómo funciona, Requisitos y Precios cabe con su CTA en
+  1440×900 (no en 1366×768); al añadir contenido, comprobarlo con clic en el navbar.
 - /privacidad aún no existe; el footer y la FAQ ya enlazan a ella.
 - WhatsAppFloat se oculta mientras un `main [data-wa-cta]` está en pantalla;
   `<Button whatsapp>` ya pone ese atributo.
