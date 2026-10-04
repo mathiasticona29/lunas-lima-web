@@ -33,7 +33,9 @@ Si una sección necesita algo que no está aquí, primero se añade la regla y d
 - **Ritmo interno:** cabecera → contenido → CTA separados por `mt-10 lg:mt-14`.
   Dentro de un bloque: `gap-8` entre columnas o ítems, `gap-3` entre un botón y su nota.
 - **Alineación:** en móvil todo a la izquierda. Desde `md`, cabecera, CTA de cierre y
-  footer van centrados. Como el contenedor de las secciones es más angosto que el del
+  footer van centrados. Única excepción: en «Cómo funciona», desde `lg`, el CTA cierra la
+  columna de los pasos (alineado a la izquierda), y ese bloque se centra en vertical
+  respecto al mockup. Como el contenedor de las secciones es más angosto que el del
   navbar, una cabecera alineada a la izquierda en escritorio se ve desfasada del logo.
 - **Ancho de lectura:** párrafos sueltos con `max-w-2xl` como máximo; texto dentro de
   columnas con `max-w-xs`.
@@ -41,21 +43,28 @@ Si una sección necesita algo que no está aquí, primero se añade la regla y d
 
 ## 3. Ritmo de fondos
 
-Las secciones alternan `background` y `card`. Solo hay una banda marina.
+Las secciones alternan `background` y `card`. El panel del hero y el CTA final son las
+únicas superficies oscuras, y comparten la clase `.showroom` (marino con luz cenital).
 
-| Sección | `tone` |
-|---|---|
-| Hero | `background` |
-| Cómo funciona | `card` |
-| Requisitos | `background` |
-| Precios | `card` |
-| FAQ | `background` |
-| CTA final | `primary` |
-| Footer | `muted` (no usa `Section`) |
+| Sección | `tone` | Contenido |
+|---|---|---|
+| Hero | `background` | Panel showroom con el auto |
+| Por tu cuenta o con nosotros | `card` | Filas comparativas separadas con líneas |
+| Cómo funciona | `background` | Pasos + mockup de conversación |
+| Requisitos | `card` | Dos listas separadas con una línea |
+| Precios | `background` | Tarjeta destacada única |
+| FAQ | `card` | Acordeón con líneas |
+| CTA final | `primary` + `.showroom` | Cabecera `onDark` y botón ámbar |
+| Footer | `muted` (no usa `Section`) | |
+
+- El orden está pensado para que todo lo que es tarjeta o mockup caiga sobre `background`
+  y las secciones `card` se resuelvan con líneas (ver §6). Si se añade o se mueve una
+  sección, hay que conservar esa correspondencia.
 
 - El tono `card` trae su `border-y` de 1px (`border`); así cada frontera entre dos tonos
   claros tiene exactamente una línea. Los demás tonos no llevan borde.
-- Sobre `primary` el texto va en `on-primary` y el botón sigue siendo ámbar.
+- Sobre `primary` el texto va en `on-primary` (`SectionHeader` con `onDark`; bajada y
+  notas en `on-primary/80`) y el botón sigue siendo ámbar. Sin tarjetas.
 - `muted` como fondo de sección está reservado al footer; dentro de las secciones se usa
   para superficies pequeñas (marcadores de ícono, pista del slider, hover del botón secundario).
 
@@ -70,6 +79,9 @@ Las secciones alternan `background` y `card`. Solo hay una banda marina.
 | Bajada | `body` 1.0625rem | `body-lg` 1.125rem desde `lg` | `muted-foreground`, `max-w-2xl` |
 | Bajada del hero | `body` | `body-lg`; `lead` 1.25rem desde `2xl` | `muted-foreground`, `max-w-lg` (`max-w-xl` desde `2xl`) |
 | Nota o aviso | `small` | igual | `muted-foreground` |
+| Precio (tarjeta de precios) | `h1` | igual | Lexend 700, `whitespace-nowrap` |
+| Rótulo de lista dentro de un bloque (`<h4>`) | `.eyebrow` | igual | «Incluye» en `primary-soft`; «No incluye» en `muted-foreground` |
+| Pregunta del acordeón (`<h3>`) | `body` | `h3` desde `lg` | Lexend 600 |
 
 - Separaciones: antetítulo → título `mt-3`; H2 → bajada `mt-3` (H1 → bajada `mt-4`);
   H3 → texto `mt-1`.
@@ -103,6 +115,40 @@ Siempre con `Button.astro`.
 - Las tarjetas van sobre fondo `background` o sobre el panel marino. En una sección
   `card` el contenido no se mete en tarjetas: se separa con espacio o con líneas `border`.
 - Sin tarjetas dentro de tarjetas. Sin hover de elevación en tarjetas que no son clicables.
+- Dentro de una tarjeta de dos columnas (precios), las columnas se separan con una línea
+  `border` (`border-t` en móvil, `border-l` desde `md`), no con otra tarjeta.
+
+### Mockup de conversación (solo en «Cómo funciona»)
+
+Muestra el producto real: una conversación corta que termina en la captura de la cita.
+
+- Marco `.mockup`: fondo `muted`, borde `border`, `rounded-card`, padding 1rem, sin sombra,
+  `max-w-md`. Va en un `<figure>`; no es una `.card`.
+- Siempre rotulado: arriba «Conversación de ejemplo» y la insignia «Ejemplo ilustrativo»
+  (`rounded-full`, fondo `card`, borde, `small` 600 en `foreground`); abajo, la nota «No es
+  una conversación real ni un documento oficial…». El texto habla de cita «agendada», nunca
+  de un resultado del permiso.
+- Burbujas `.bubble`: ancho máximo 85 %, `rounded-card` con la esquina de la cola en 0.25rem.
+  `.bubble-in` (nosotros): fondo `card` con borde, a la izquierda. `.bubble-out` (cliente):
+  fondo `primary`, texto `on-primary`, a la derecha. Cada una lleva su emisor en `sr-only`.
+- Sin verde, avatares, horas, ticks ni nombres de personas: no debe parecer un testimonio ni
+  imitar la interfaz de WhatsApp.
+- La captura de la cita es una burbuja más, con etiquetas (`small`) y barras esqueleto
+  `bg-muted` en lugar de datos: nada de fechas, sedes ni códigos, ni parecido con el
+  sistema oficial.
+- No se anima el «tipeo»; las burbujas entran con `data-reveal` como cualquier ítem.
+
+### Listas y acordeón
+
+- Lista de verificación: `<ul role="list">` con `gap-3`; cada ítem `flex gap-3` con ícono
+  `check` (`sm`, `primary-soft`, `mt-0.5`). Lo que no aplica o no incluye usa `minus` y
+  texto `muted-foreground`; nunca rojo.
+- Fila comparativa: par «Por tu cuenta» (`muted-foreground`, `minus`) / «Con nosotros»
+  (`primary` 600, `check`), dos columnas desde `md` y apilado en móvil con su rótulo
+  `.eyebrow`; filas separadas con `border-t`.
+- Acordeón: `<details>` nativo, sin JS ni tarjeta. Filas con `border-t`, `<summary>` de
+  alto mínimo 3.5rem con ícono `chevron-down` que gira 180° (180 ms, sin giro animado con
+  movimiento reducido). Respuesta en `muted-foreground`, `max-w-2xl`. Ancho `max-w-3xl`.
 
 ## 7. Íconos
 
@@ -126,7 +172,7 @@ Siempre con `Icon.astro`: de línea, grilla de 24, sin relleno, puntas y uniones
 | Token | Valor | Uso |
 |---|---|---|
 | `rounded-button` | 0.75rem | Botones y controles |
-| `rounded-card` | 1rem | Tarjetas |
+| `rounded-card` | 1rem | Tarjetas, marco del mockup y burbujas |
 | `rounded-panel` | 1.5rem | Paneles grandes a sangre (panel del auto) |
 | `rounded-full` | — | Marcadores, insignias, botón flotante |
 

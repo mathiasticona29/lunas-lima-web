@@ -1,18 +1,23 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
+import Comparativa from '../components/Comparativa.astro';
 import ComoFunciona from '../components/ComoFunciona.astro';
+import Requisitos from '../components/Requisitos.astro';
+import Precios from '../components/Precios.astro';
+import Faq from '../components/Faq.astro';
+import CtaFinal from '../components/CtaFinal.astro';
 ---
 
 <Layout
-	title="Gestión de citas para permiso de lunas polarizadas en Lima"
-	description="Servicio privado: gestionamos tu cita para el permiso de lunas polarizadas en Lima y te orientamos para el día del trámite. Atención por WhatsApp."
+	title="Cita para lunas polarizadas en Lima | Gestión Lunas Lima"
+	description="Gestionamos tu cita para el permiso de lunas polarizadas en Lima y te orientamos para el día del trámite. Servicio privado de gestión; no somos la PNP."
 >
 	<Hero />
+	<Comparativa />
 	<ComoFunciona />
-	<!-- Anclas del navbar: secciones vacías hasta que se construyan -->
-
-	<section id="requisitos" class="scroll-mt-20"></section>
-	<section id="precios" class="scroll-mt-20"></section>
-	<section id="faq" class="scroll-mt-20"></section>
+	<Requisitos />
+	<Precios />
+	<Faq />
+	<CtaFinal />
 </Layout>

@@ -27,7 +27,8 @@
 
 ## Secciones
 Navbar → Hero con auto 3D (oscurecido automático al cargar + slider Claras↔Oscuras)
-→ Cómo funciona (3 pasos) → Requisitos → Precios → FAQ → CTA final.
+→ Por tu cuenta o con nosotros (comparativa) → Cómo funciona (3 pasos + mockup de
+conversación de ejemplo) → Requisitos → Precios → FAQ → CTA final (banda showroom).
 Footer (centrado desde md) con aviso "No somos la PNP", crédito del modelo 3D y enlace
 a /privacidad.
 
@@ -66,13 +67,21 @@ a /privacidad.
   `[data-reveal]`; los que entran a la vez se escalonan solos. El texto del hero entra al
   cargar con `data-reveal-load` (CSS puro, para no retrasar el LCP). Layout.astro pone la clase
   `js` en `<html>` antes de pintar; sin JS o con movimiento reducido todo queda visible.
-- src/components/ComoFunciona.astro: sección #como-funciona (fondo card, 3 pasos en `<ol>`
-  con línea conectora vertical en móvil y horizontal desde md, CTA con mensaje prellenado
-  propio).
+- src/components/Comparativa.astro: sección #por-que (fondo card), pares «Por tu cuenta» /
+  «Con nosotros» en filas con líneas. No está en el navbar.
+- src/components/ComoFunciona.astro: sección #como-funciona (fondo background, 3 pasos en
+  `<ol>` con línea conectora vertical y, a su lado desde lg, el mockup de conversación de
+  ejemplo que termina en la «captura» de la cita con barras esqueleto; ver DESIGN.md §6).
+  El mockup no lleva datos, nombres ni verde, y siempre va rotulado como ejemplo.
+- src/components/Requisitos.astro (#requisitos, card), Precios.astro (#precios, background,
+  tarjeta destacada única), Faq.astro (#faq, card, acordeón con `<details>`) y
+  CtaFinal.astro (#contacto, banda `.showroom`). Cada CTA lleva su propio mensaje
+  prellenado para saber de qué sección viene el cliente.
+- Los marcadores [VERIFICAR] se ven en la página (precio, tasa, requisitos del día, plazos,
+  medios de pago, reprogramación, cobertura): hay que reemplazarlos antes de publicar.
+- /privacidad aún no existe; el footer y la FAQ ya enlazan a ella.
 - WhatsAppFloat se oculta mientras un `main [data-wa-cta]` está en pantalla;
   `<Button whatsapp>` ya pone ese atributo.
-- src/pages/index.astro tiene secciones vacías con los id del navbar; reemplazarlas
-  al construir cada sección.
 - public/auto.glb (Draco), decoders en public/draco/, fallback en public/auto-fallback.webp.
 - Modelo 3D: solo se oscurece el material "Glass_ext-tinted" (lunas laterales y
   posterior). "Glass_ext" es el parabrisas y queda claro. No tocar faros (Glass_-_Clear*,

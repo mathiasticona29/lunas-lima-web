@@ -1,19 +1,51 @@
 ---
-
+const links = [
+	{ href: '/#como-funciona', label: 'Cómo funciona' },
+	{ href: '/#requisitos', label: 'Requisitos' },
+	{ href: '/#precios', label: 'Precios' },
+	{ href: '/#faq', label: 'Preguntas frecuentes' },
+	{ href: '/privacidad', label: 'Política de privacidad' },
+];
 ---
 
-<footer class="bg-muted py-8 pb-24 text-small text-muted-foreground">
-	<div class="container-page flex flex-col gap-3 md:text-center">
-		<p class="font-semibold text-primary">
-			No somos la PNP. Somos un servicio privado de gestión de citas.
-		</p>
-		<p>
-			<a href="/privacidad" class="inline-flex min-h-11 items-center text-primary-soft underline underline-offset-2">Política de privacidad</a>
-		</p>
-		<p>
-			Modelo 3D: «<a href="https://sketchfab.com/3d-models/generic-sedan-car-58c33766470d46e7b2aed542650494e5" class="underline underline-offset-2" target="_blank" rel="noopener noreferrer">Generic Sedan Car</a>»
-			de <a href="https://sketchfab.com/marciomeireles" class="underline underline-offset-2" target="_blank" rel="noopener noreferrer">Márcio Meireles</a> (Sketchfab),
-			bajo licencia <a href="https://creativecommons.org/licenses/by/4.0/" class="underline underline-offset-2" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>. Adaptado para este sitio.
-		</p>
+<footer class="bg-muted pt-10 pb-24 text-small text-muted-foreground lg:pt-12 lg:pb-12">
+	<div class="container-page flex flex-col gap-6 md:items-center md:text-center">
+		<div>
+			<p class="font-heading text-h3 font-bold tracking-tight text-primary">
+				Lunas <span class="text-primary-soft">Lima</span>
+			</p>
+			<p class="mt-2 max-w-md text-body">
+				Gestionamos tu cita para el permiso de lunas polarizadas en Lima y te orientamos para el día del trámite.
+			</p>
+		</div>
+
+		<nav aria-label="Pie de página">
+			<ul role="list" class="flex flex-col md:flex-row md:flex-wrap md:justify-center md:gap-x-6">
+				{
+					links.map((link) => (
+						<li>
+							<a
+								href={link.href}
+								class="inline-flex min-h-11 items-center text-body font-semibold text-primary underline-offset-4 hover:underline"
+							>
+								{link.label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+
+		<div class="flex w-full flex-col gap-3 border-t border-border pt-6 md:items-center">
+			<p class="max-w-2xl font-semibold text-balance text-primary">
+				No somos la PNP. Somos un servicio privado de gestión de citas; no actuamos en su nombre ni tenemos
+				vínculo oficial.
+			</p>
+			<p class="max-w-2xl">
+				Modelo 3D: «<a href="https://sketchfab.com/3d-models/generic-sedan-car-58c33766470d46e7b2aed542650494e5" class="underline underline-offset-2" target="_blank" rel="noopener noreferrer">Generic Sedan Car</a>»
+				de <a href="https://sketchfab.com/marciomeireles" class="underline underline-offset-2" target="_blank" rel="noopener noreferrer">Márcio Meireles</a> (Sketchfab),
+				bajo licencia <a href="https://creativecommons.org/licenses/by/4.0/" class="underline underline-offset-2" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>. Adaptado para este sitio.
+			</p>
+		</div>
 	</div>
 </footer>

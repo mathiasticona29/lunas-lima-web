@@ -1,0 +1,74 @@
+---
+import { whatsappUrl } from '../config';
+import Button from './Button.astro';
+import Icon from './Icon.astro';
+import Section from './Section.astro';
+import SectionHeader from './SectionHeader.astro';
+
+const ctaUrl = whatsappUrl('Hola, quiero confirmar qué requisitos necesito para mi permiso de lunas polarizadas');
+
+const paraGestionar = [
+	{ icon: 'id-card', label: 'DNI' },
+	{ icon: 'car', label: 'Tarjeta de propiedad del vehículo' },
+	{ icon: 'mail', label: 'Correo electrónico' },
+	{ icon: 'phone', label: 'Número de celular' },
+] as const;
+
+// Los [VERIFICAR] son datos por confirmar con la norma vigente; no reemplazar por cifras inventadas.
+const paraElDia = [
+	'Tu DNI',
+	'Tarjeta de propiedad del vehículo',
+	'El vehículo',
+	'La captura de tu cita confirmada',
+	'Comprobante de pago de la tasa oficial [VERIFICAR: si se exige y en qué momento]',
+	'Otros documentos o condiciones del vehículo [VERIFICAR: lista vigente según la norma y la PNP]',
+];
+---
+
+<Section id="requisitos" tone="card" aria-labelledby="requisitos-titulo">
+	<SectionHeader
+		eyebrow="Requisitos"
+		title="Qué necesitas para empezar y para el día del trámite"
+		lead="Con lo primero gestionamos tu cita. Lo segundo lo confirmamos contigo antes de que vayas."
+		titleId="requisitos-titulo"
+	/>
+
+	<div class="mt-10 grid gap-10 lg:mt-14 lg:grid-cols-2 lg:gap-0">
+		<div class="lg:pr-12">
+			<h3 data-reveal class="text-h3 font-semibold lg:text-h3-lg">Lo que nos envías para gestionar tu cita</h3>
+			<ul role="list" class="mt-6 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-4 lg:grid-cols-2">
+				{
+					paraGestionar.map((item) => (
+						<li data-reveal class="flex flex-col gap-3">
+							<span class="flex size-14 items-center justify-center rounded-full bg-muted">
+								<Icon name={item.icon} size="md" class="text-primary-soft" />
+							</span>
+							<span class="max-w-xs font-semibold text-primary">{item.label}</span>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+
+		<div class="border-t border-border pt-10 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-12">
+			<h3 data-reveal class="text-h3 font-semibold lg:text-h3-lg">Lo que llevas el día del trámite</h3>
+			<ul role="list" class="mt-6 flex flex-col gap-3">
+				{
+					paraElDia.map((item) => (
+						<li data-reveal class="flex gap-3">
+							<Icon name="check" class="mt-0.5 text-primary-soft" />
+							<span>{item}</span>
+						</li>
+					))
+				}
+			</ul>
+			<p data-reveal class="mt-6 text-small text-muted-foreground">
+				Los requisitos pueden cambiar. Te confirmamos la lista vigente por WhatsApp antes de tu cita.
+			</p>
+		</div>
+	</div>
+
+	<div data-reveal class="mt-10 flex flex-col items-start gap-3 md:items-center lg:mt-14">
+		<Button href={ctaUrl} whatsapp class="w-full sm:w-auto">Confirma tus requisitos</Button>
+	</div>
+</Section>

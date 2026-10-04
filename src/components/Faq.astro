@@ -1,0 +1,102 @@
+---
+import { whatsappUrl } from '../config';
+import Button from './Button.astro';
+import Icon from './Icon.astro';
+import Section from './Section.astro';
+import SectionHeader from './SectionHeader.astro';
+
+const ctaUrl = whatsappUrl('Hola, tengo una consulta antes de contratar el servicio');
+
+// Las respuestas admiten HTML (enlaces). Los [VERIFICAR] son datos por confirmar.
+const faqs = [
+	{
+		q: '¿Ustedes son la PNP?',
+		a: 'No. Somos un servicio privado de gestión: creamos tu usuario y tu cita, y te orientamos. No actuamos en nombre de la PNP ni tenemos vínculo oficial con ella.',
+	},
+	{
+		q: '¿La cita tiene costo?',
+		a: 'La cita es gratuita. Lo que cobramos es nuestra gestión, y la tasa oficial va aparte (monto vigente: [VERIFICAR]).',
+	},
+	{
+		q: '¿Garantizan que me aprueben el permiso?',
+		a: 'No. La decisión es de la PNP y nadie puede asegurarla. Gestionamos tu cita y te orientamos para que llegues preparado.',
+	},
+	{
+		q: '¿Puedo hacerlo yo mismo?',
+		a: 'Sí, puedes hacer el trámite por tu cuenta. Nuestro servicio es para quien prefiere que otros se encarguen del registro y lo orienten.',
+	},
+	{
+		q: '¿Cuánto demora conseguir la cita?',
+		a: 'Depende de la disponibilidad. En condiciones normales: [VERIFICAR plazo]. Te avisamos por WhatsApp apenas tengamos novedades.',
+	},
+	{
+		q: '¿Cómo pago?',
+		a: 'Aceptamos Yape. Otros medios: [VERIFICAR]. Te indicamos los datos de pago por WhatsApp.',
+	},
+	{
+		q: '¿Qué pasa con mis datos personales?',
+		a: 'Los usamos solo para gestionar tu cita, conforme a la Ley 29733 de protección de datos personales. Detalles en nuestra <a href="/privacidad">política de privacidad</a>.',
+	},
+	{
+		q: '¿Atienden fuera de Lima?',
+		a: 'Hoy nuestro servicio está pensado para Lima. Otras ciudades: [VERIFICAR]. Escríbenos y te decimos si podemos ayudarte.',
+	},
+	{
+		q: '¿Qué pasa si no puedo ir el día de mi cita?',
+		a: 'Avísanos cuanto antes por WhatsApp y te orientamos. Las opciones de reprogramación dependen de las reglas de la PNP: [VERIFICAR].',
+	},
+];
+---
+
+<Section id="faq" tone="card" aria-labelledby="faq-titulo">
+	<SectionHeader
+		eyebrow="Preguntas frecuentes"
+		title="Lo que suelen preguntarnos"
+		lead="Si tu duda no está aquí, escríbenos por WhatsApp."
+		titleId="faq-titulo"
+	/>
+
+	<div class="mx-auto mt-10 max-w-3xl border-b border-border lg:mt-14">
+		{
+			faqs.map((faq) => (
+				<details data-reveal class="faq border-t border-border">
+					<summary class="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-4 font-heading font-semibold text-primary">
+						<h3 class="text-body lg:text-h3">{faq.q}</h3>
+						<Icon name="chevron-down" class="faq-chevron text-primary-soft" />
+					</summary>
+					<p class="faq-answer max-w-2xl pb-5 text-muted-foreground" set:html={faq.a} />
+				</details>
+			))
+		}
+	</div>
+
+	<div data-reveal class="mt-10 flex flex-col items-start gap-3 md:items-center lg:mt-14">
+		<Button href={ctaUrl} whatsapp class="w-full sm:w-auto">Pregúntanos por WhatsApp</Button>
+	</div>
+</Section>
+
+<style>
+	.faq summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.faq-chevron {
+		transition: transform 180ms var(--ease-out-soft);
+	}
+
+	.faq[open] .faq-chevron {
+		transform: rotate(180deg);
+	}
+
+	.faq-answer :global(a) {
+		color: var(--color-primary-soft);
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.faq-chevron {
+			transition: none;
+		}
+	}
+</style>

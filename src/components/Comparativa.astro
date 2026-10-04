@@ -1,0 +1,65 @@
+---
+import Icon from './Icon.astro';
+import Section from './Section.astro';
+import SectionHeader from './SectionHeader.astro';
+
+const pairs = [
+	{
+		solo: 'Te toca entender el sistema y crear tu usuario.',
+		nosotros: 'Nosotros creamos tu usuario y tu cita.',
+	},
+	{
+		solo: 'Si dudas de un dato o un documento, avanzas a ciegas.',
+		nosotros: 'Revisamos tus datos antes de agendar.',
+	},
+	{
+		solo: 'Llegas al día del trámite sin saber bien qué esperar.',
+		nosotros: 'Te contamos qué llevar y qué esperar.',
+	},
+	{
+		solo: 'Quedas con la duda de si tu cita quedó bien registrada.',
+		nosotros: 'Te enviamos la captura de tu cita confirmada.',
+	},
+];
+---
+
+<Section id="por-que" tone="card" aria-labelledby="por-que-titulo">
+	<SectionHeader
+		eyebrow="Por tu cuenta o con nosotros"
+		title="Un trámite largo se vuelve más llevadero"
+		lead="Hacerlo solo es posible. Con acompañamiento, llegas con menos dudas y menos idas y vueltas."
+		titleId="por-que-titulo"
+	/>
+
+	<div class="mx-auto mt-10 max-w-4xl lg:mt-14">
+		<div aria-hidden="true" class="hidden grid-cols-2 gap-8 pb-3 md:grid [&>p]:pl-9">
+			<p class="eyebrow text-muted-foreground">Por tu cuenta</p>
+			<p class="eyebrow">Con nosotros</p>
+		</div>
+		<ul role="list" class="border-b border-border">
+			{
+				pairs.map((pair) => (
+					<li data-reveal class="grid gap-3 border-t border-border py-5 md:grid-cols-2 md:gap-8">
+						<p class="flex gap-3 text-muted-foreground">
+							<Icon name="minus" class="mt-0.5" />
+							<span>
+								<span class="eyebrow block text-muted-foreground md:sr-only">Por tu cuenta</span>
+								{pair.solo}
+							</span>
+						</p>
+						<p class="flex gap-3 font-semibold text-primary">
+							<Icon name="check" class="mt-0.5 text-primary-soft" />
+							<span>
+								<span class="eyebrow block md:sr-only">Con nosotros</span>
+								{pair.nosotros}
+							</span>
+						</p>
+					</li>
+				))
+			}
+		</ul>
+		<p data-reveal class="mt-6 text-small text-muted-foreground md:text-center">
+			La decisión final siempre es de la PNP; nosotros gestionamos y orientamos.
+		</p>
+	</div>
+</Section>
