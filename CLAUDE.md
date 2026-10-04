@@ -99,6 +99,8 @@ a /privacidad.
 - Antes de cambios grandes, presenta un plan y espera aprobación.
 - Después de cada cambio visual, usa Playwright para abrir http://localhost:4321,
   capturar en 375px, 768px y 1440px, revisar y corregir antes de dar la tarea por terminada.
+- Ojo con las capturas: los revisores pueden dejar el navegador de Playwright con
+  movimiento reducido emulado (sin 3D ni slider); restablecerlo antes de capturar.
 - Verificación visual: máximo 2 rondas de capturas por tarea. Si algo sigue mal,
   detente y explícame el problema.
 - Ejecuta `npx astro check` y `npm run build` al terminar; no entregues con errores.

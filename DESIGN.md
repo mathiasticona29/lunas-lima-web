@@ -124,7 +124,7 @@ Muestra el producto real: una conversación corta que termina en la captura de l
 
 - Marco `.mockup`: fondo `muted`, borde `border`, `rounded-card`, padding 1rem, sin sombra,
   `max-w-md`. Va en un `<figure>`; no es una `.card`.
-- Siempre rotulado: arriba «Conversación de ejemplo» y la insignia «Ejemplo ilustrativo»
+- Siempre rotulado: arriba «Conversación» y la insignia «Ejemplo ilustrativo»
   (`rounded-full`, fondo `card`, borde, `small` 600 en `foreground`); abajo, la nota «No es
   una conversación real ni un documento oficial…». El texto habla de cita «agendada», nunca
   de un resultado del permiso.
