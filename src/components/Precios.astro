@@ -35,15 +35,15 @@ const noIncluye = [
 		data-reveal
 		class="card card-featured mx-auto mt-10 grid max-w-4xl gap-6 md:grid-cols-[1fr_1.25fr] md:gap-0 md:p-8 lg:mt-14"
 	>
-		<div class="flex flex-col md:pr-8">
+		<div class="flex flex-col md:justify-center md:pr-8">
 			<h3 class="text-h3 font-semibold lg:text-h3-lg">Gestión de cita para permiso de lunas polarizadas</h3>
 			<p class="mt-4 font-heading text-h1 font-bold whitespace-nowrap text-primary">S/ [VERIFICAR]</p>
 			<p class="mt-2 text-small text-muted-foreground">Solo por la gestión; la tasa oficial va aparte.</p>
-			<p class="mt-4 flex items-center gap-3 text-muted-foreground">
-				<Icon name="phone" class="text-primary-soft" />
+			<p class="mt-4 flex items-start gap-3 text-muted-foreground">
+				<Icon name="wallet" class="mt-0.5 text-primary-soft" />
 				Pago por Yape. Otros medios: [VERIFICAR].
 			</p>
-			<div class="mt-6 md:mt-auto md:pt-8">
+			<div class="mt-6">
 				<Button href={ctaUrl} whatsapp class="w-full">Agenda tu cita</Button>
 			</div>
 		</div>
@@ -75,6 +75,6 @@ const noIncluye = [
 	</div>
 
 	<p data-reveal class="mx-auto mt-6 max-w-2xl text-small text-muted-foreground md:text-center">
-		El precio es solo por la gestión. La tasa oficial se paga aparte y la decisión sobre el permiso es de la PNP.
+		La decisión sobre el permiso es siempre de la PNP; nosotros gestionamos tu cita y te orientamos.
 	</p>
 </Section>
