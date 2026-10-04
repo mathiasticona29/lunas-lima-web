@@ -90,7 +90,8 @@ a /privacidad.
   material "Car_Paint_-_All_Colors" (se quita su textura de color; el .glb no cambia).
   Si cambia el color, regenerar public/auto-fallback.webp.
 - Crédito: «Generic Sedan Car» de Márcio Meireles (Sketchfab), CC BY 4.0.
-- auto-original.glb está en .gitignore; nunca subirlo.
+- auto-original.glb y videos-originales/ (videos de stock sin optimizar) están en
+  .gitignore; nunca subirlos.
 
 ## Forma de trabajo
 - Las secciones se construyen con el comando `/seccion <sección y qué hacer>`

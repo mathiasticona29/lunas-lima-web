@@ -4,8 +4,8 @@ import WhatsAppIcon from './WhatsAppIcon.astro';
 
 interface Props extends HTMLAttributes<'a'> {
 	href: string;
-	/** primary: ámbar, la acción principal. secondary: contorno marino. */
-	variant?: 'primary' | 'secondary';
+	/** primary: ámbar, la acción principal. secondary: contorno marino. dark: el de apoyo sobre fondos oscuros. */
+	variant?: 'primary' | 'secondary' | 'dark';
 	/** sm solo en el navbar. */
 	size?: 'md' | 'sm';
 	/** CTA de WhatsApp: ícono, pestaña nueva, aviso para lectores de pantalla y `data-wa-cta`. */

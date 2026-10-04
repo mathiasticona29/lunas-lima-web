@@ -96,6 +96,7 @@ Siempre con `Button.astro`.
 |---|---|---|
 | `primary` | Fondo `accent`, texto `on-accent`; hover `accent-hover` | La acción principal. Una por bloque visible. |
 | `secondary` | Borde 1px `primary`, texto `primary`; hover fondo `muted` | Acción de apoyo junto a un primario (anclas internas). |
+| `dark` | Borde 1px `on-primary`, fondo `card`, texto `primary`; hover fondo `muted` | La acción de apoyo cuando va sobre un fondo oscuro (video del hero). |
 
 - Tamaño `md`: alto mínimo 3rem, padding 0.75rem × 1.5rem, Lexend 600. `sm` (2.75rem,
   0.5rem × 1rem) solo en el navbar.

@@ -26,5 +26,8 @@ pnpm-debug.log*
 # modelo 3D original sin comprimir
 auto-original.glb
 
+# videos originales sin optimizar
+videos-originales/
+
 # capturas y snapshots del MCP de Playwright
 .playwright-mcp/

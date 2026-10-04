@@ -244,6 +244,17 @@
     background-color: var(--color-muted);
   }
 
+  /* Acción de apoyo sobre fondos oscuros (video del hero): relleno claro y texto marino. */
+  .btn-dark {
+    border-color: var(--color-on-primary);
+    background-color: var(--color-card);
+    color: var(--color-primary);
+  }
+
+  .btn-dark:hover {
+    background-color: var(--color-muted);
+  }
+
   /* Íconos de línea: usar siempre a través de Icon.astro */
   .icon {
     width: 1.5rem;

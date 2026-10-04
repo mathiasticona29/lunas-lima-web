@@ -10,106 +10,111 @@ const trust = [
 	{ icon: 'calendar-check', label: 'Cita con captura' },
 	{ icon: 'phone', label: 'Pago por Yape' },
 ] as const;
+
+const prep = [
+	'Te decimos qué llevar y qué revisar antes de ir.',
+	'Resolvemos tus dudas por WhatsApp.',
+	'Tu cita queda lista a tu nombre.',
+];
 ---
 
 <Section
 	flush
 	data-hero
-	class="hero relative isolate flex flex-col overflow-hidden pt-16 lg:justify-center lg:pt-0"
+	class="hero relative isolate flex flex-col overflow-hidden pt-16 text-on-primary lg:justify-center lg:pt-0"
 >
-	<div class="hero-copy container-page relative z-10 order-3 pt-6 pb-12 md:pt-10 lg:order-none lg:pt-24 lg:pb-6 lg:tall:pt-28 lg:tall:pb-12">
-		<SectionHeader
-			level={1}
-			align="left"
-			eyebrow="Servicio privado de gestión · Lima"
-			title="Tu cita para lunas polarizadas, sin vueltas"
-			lead="Creamos tu usuario y tu cita, y te orientamos para el día del trámite. La cita es gratuita; cobramos la gestión."
-		/>
-		<div
-			data-reveal-load
-			style="--reveal-i: 3"
-			class="mt-6 flex flex-col gap-3 whitespace-nowrap sm:flex-row sm:items-center lg:flex-col lg:items-start xl:flex-row xl:tall:mt-8 xl:flex-wrap xl:items-center"
-		>
-			<Button href={whatsappUrl()} whatsapp class="px-4 sm:px-6">Agenda tu cita por WhatsApp</Button>
-			<Button href="#requisitos" variant="secondary">Ver requisitos</Button>
+	<!-- Fondo: el video a sangre, debajo del navbar. En móvil va arriba, entero y a todo el
+	     ancho (en vertical no cabría el auto), y se funde con el marino sobre el que sigue
+	     el texto. La imagen es su primer cuadro: póster mientras carga y fallback si el
+	     video falla, si el navegador bloquea el autoplay o con movimiento reducido. -->
+	<div class="hero-stage absolute inset-x-0 top-16 bottom-0 -z-10 bg-primary-deep lg:top-20">
+		<div class="hero-media absolute inset-x-0 top-0">
+			<picture>
+				<source media="(min-width: 64rem)" srcset="/hero/auto-wide-1080.webp" width="1920" height="1080" />
+				<img
+					src="/hero/auto-720.webp"
+					alt="Sedán blanco de perfil al atardecer, con las lunas laterales y la posterior oscuras. Imagen referencial."
+					width="1080"
+					height="720"
+					decoding="async"
+					fetchpriority="high"
+					class="hero-frame"
+				/>
+			</picture>
+			<video
+				data-car-video
+				muted
+				loop
+				playsinline
+				preload="none"
+				disablepictureinpicture
+				aria-hidden="true"
+				tabindex="-1"
+				class="hero-frame car-video"
+			>
+			</video>
 		</div>
+	</div>
 
-		<ul
-			data-reveal-load
-			style="--reveal-i: 4"
-			class="mt-8 grid gap-3 border-t border-border pt-6 text-body font-semibold text-primary sm:grid-cols-3 sm:gap-4 lg:mt-6 lg:grid-cols-1 lg:pt-5 lg:tall:mt-8 lg:tall:pt-6 xl:grid-cols-3 xl:tall:mt-10 xl:tall:pt-8"
+	<div class="hero-copy container-page relative pb-8 lg:pt-24 lg:pb-6 lg:tall:pt-28 lg:tall:pb-12">
+		<!-- Panel oscuro semitransparente: asegura la lectura sobre cualquier parte del video. -->
+		<div
+			class="hero-text -mx-gutter px-gutter py-5 md:-mx-gutter-lg md:px-gutter-lg lg:mx-0 lg:w-fit lg:rounded-card lg:p-6"
 		>
+			<SectionHeader
+				level={1}
+				align="left"
+				onDark
+				eyebrow="Servicio privado de gestión · Lima"
+				title="Tu cita para lunas polarizadas, sin vueltas"
+				lead="Creamos tu usuario y tu cita, y te orientamos para el día del trámite. La cita es gratuita; cobramos la gestión."
+			/>
+			<div
+				data-reveal-load
+				style="--reveal-i: 3"
+				class="mt-6 flex flex-col gap-3 whitespace-nowrap sm:flex-row sm:items-center lg:flex-col lg:items-start xl:flex-row xl:flex-wrap xl:items-center"
+			>
+				<Button href={whatsappUrl()} whatsapp class="px-4 sm:px-6">Agenda tu cita por WhatsApp</Button>
+				<Button href="#requisitos" variant="dark">Ver requisitos</Button>
+			</div>
+
+			<ul
+				data-reveal-load
+				style="--reveal-i: 4"
+				class="mt-6 grid gap-3 border-t border-on-primary/25 pt-5 text-body font-semibold sm:grid-cols-3 sm:gap-4 lg:grid-cols-1 xl:grid-cols-3"
+			>
+				{
+					trust.map((item) => (
+						<li class="flex items-center gap-3 sm:flex-col sm:items-start sm:gap-2 lg:flex-row lg:items-center lg:gap-3 xl:flex-col xl:items-start xl:gap-2">
+							<Icon name={item.icon} size="lg" />
+							{item.label}
+						</li>
+					))
+				}
+			</ul>
+
+			<p data-reveal-load style="--reveal-i: 5" class="mt-5 text-body text-on-primary/80">
+				Cobramos solo por la gestión; la tasa oficial va aparte. No somos la PNP.
+			</p>
+		</div>
+	</div>
+
+	<div
+		class="hero-card card relative mx-gutter mb-8 p-4 sm:mx-auto sm:w-full sm:max-w-md lg:absolute lg:right-8 lg:bottom-8 lg:mx-0 lg:mb-0 lg:w-80 lg:p-5"
+	>
+		<p class="font-heading font-semibold text-primary">Llega preparado al trámite</p>
+		<ul role="list" class="mt-3 grid gap-2 text-small text-foreground">
 			{
-				trust.map((item) => (
-					<li class="flex items-center gap-3 sm:flex-col sm:items-start sm:gap-2 lg:flex-row lg:items-center lg:gap-3 xl:flex-col xl:items-start xl:gap-2">
-						<Icon name={item.icon} size="lg" class="text-primary-soft" />
-						{item.label}
+				prep.map((item) => (
+					<li class="flex gap-2">
+						<Icon name="check" class="mt-0.5 shrink-0 text-primary-soft" />
+						{item}
 					</li>
 				))
 			}
 		</ul>
-
-		<p data-reveal-load style="--reveal-i: 5" class="mt-6 text-body text-muted-foreground lg:mt-5 lg:tall:mt-6 xl:tall:mt-8">
-			Cobramos solo por la gestión; la tasa oficial va aparte. No somos la PNP.
-		</p>
-	</div>
-
-	<div
-		class="car-stage showroom relative isolate order-1 h-[34svh] min-h-60 w-full shrink-0 overflow-hidden md:h-[44svh] md:min-h-96 lg:absolute lg:top-20 lg:right-0 lg:bottom-0 lg:order-none lg:h-auto lg:w-[54%] lg:rounded-tl-panel"
-	>
-		<!-- Imagen estática: póster mientras carga el 3D y fallback sin WebGL o con movimiento
-		     reducido. Cuadrada y centrada: misma pose, encuadre y luz que el primer frame del canvas. -->
-		<img
-			data-car-fallback
-			src="/auto-fallback.webp"
-			alt="Sedán plateado con las lunas laterales y la posterior oscurecidas"
-			width="1200"
-			height="1200"
-			decoding="async"
-			fetchpriority="high"
-			class="car-fallback absolute top-1/2 left-0 aspect-square h-auto w-full max-w-none -translate-y-1/2"
-		/>
-		<div
-			data-car-canvas
-			role="img"
-			aria-label="Auto sedán en 3D. Arrástralo para girarlo."
-			class="car-canvas absolute inset-0"
-		>
-		</div>
-		<p
-			data-drag-hint
-			aria-hidden="true"
-			class="car-hint pointer-events-none absolute opacity-0 top-3 left-1/2 flex -translate-x-1/2 items-center gap-2 text-small whitespace-nowrap text-on-primary/75 lg:top-[20%]"
-		>
-			<Icon name="arrows-horizontal" size="xs" />
-			Arrastra para girar
-		</p>
-	</div>
-
-	<div
-		class="car-slider card relative z-10 order-2 mx-gutter -mt-14 p-4 motion-reduce:hidden sm:mx-auto sm:w-full sm:max-w-md lg:absolute lg:right-8 lg:bottom-8 lg:order-none lg:mx-0 lg:mt-0 lg:w-80 lg:p-5"
-	>
-		<p class="font-heading font-semibold text-primary">Mira la diferencia</p>
-		<p id="tint-help" class="sr-only text-small text-muted-foreground sm:not-sr-only">Desliza para oscurecer las lunas.</p>
-		<div data-tint-control class="car-slider-control">
-			<input
-				data-tint-slider
-				type="range"
-				min="0"
-				max="100"
-				value="0"
-				aria-label="Oscurecimiento de las lunas laterales y posterior"
-				aria-valuetext="Vista referencial: lunas claras, sin oscurecer"
-				aria-describedby="tint-help"
-				class="tint-slider mt-1"
-			/>
-			<div class="flex justify-between text-small font-semibold text-primary" aria-hidden="true">
-				<span>Claras</span>
-				<span>Oscuras</span>
-			</div>
-		</div>
-		<p class="mt-2 border-t border-border pt-2 text-small text-muted-foreground">
-			Vista referencial; no indica el nivel permitido.
+		<p class="mt-3 border-t border-border pt-2 text-small text-muted-foreground">
+			Orientación para el día del trámite; la decisión es de la PNP.
 		</p>
 	</div>
 </Section>
@@ -117,14 +122,67 @@ const trust = [
 <style>
 	.hero {
 		min-height: 100svh;
+		--hero-shade: var(--color-primary-deep);
 	}
 
-	/* Escritorio: alto con tope, para que en pantallas altas asome la sección siguiente
-	   en vez de crecer el vacío alrededor del texto. La columna de texto ocupa el 46 % que deja libre el panel, arranca en la
-	   misma línea que el logo del navbar (.container-wide) y guarda 3rem antes del panel. */
+	/* Móvil y tablet: el video ocupa el ancho en 3:2 y su borde inferior se funde con el
+	   marino; el texto arranca sobre la pista, justo debajo de las llantas. */
+	.hero-media {
+		aspect-ratio: 3 / 2;
+		mask-image: linear-gradient(to bottom, #000 88%, transparent);
+	}
+
+	@media (max-width: 63.999rem) {
+		.hero-copy {
+			padding-top: calc(100vw * 2 / 3 * 0.87);
+		}
+	}
+
+	.hero-frame {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	/* El video aparece sobre el póster cuando ya está reproduciéndose. */
+	.car-video {
+		opacity: 0;
+		transition: opacity 300ms linear;
+	}
+
+	[data-hero][data-playing] .car-video {
+		opacity: 1;
+	}
+
+	.hero-text {
+		background-color: color-mix(in srgb, var(--hero-shade) 72%, transparent);
+	}
+
+	/* Sobre el panel el anillo de foco va en claro. */
+	.hero-copy :global(:focus-visible) {
+		outline-color: var(--color-on-primary);
+	}
+
+	/* Escritorio: el hero ocupa toda la primera pantalla, sin tope de alto, para que el
+	   video llegue hasta el borde inferior y no asome la sección siguiente. El video llena
+	   todo el hero; la columna de texto flota encima, a la izquierda, en la misma línea
+	   que el logo del navbar (.container-wide). */
 	@media (min-width: 64rem) {
 		.hero {
-			min-height: clamp(40rem, 100svh, 54rem);
+			min-height: max(40rem, 100svh);
+		}
+
+		.hero-media {
+			bottom: 0;
+			aspect-ratio: auto;
+			mask-image: none;
+		}
+
+		/* En pantallas más angostas que 16:9 se recorta el lado izquierdo (queda bajo el texto). */
+		.hero-frame {
+			object-position: 70% 85%;
 		}
 
 		.hero-copy {
@@ -137,6 +195,11 @@ const trust = [
 				calc((100% - var(--container-wide)) / 2 + var(--spacing-gutter-lg))
 			);
 		}
+
+		/* El panel sobresale lo que mide su padding: el texto sigue alineado con el logo. */
+		.hero-text {
+			margin-left: -1.5rem;
+		}
 	}
 
 	@media (min-width: 90rem) {
@@ -148,231 +211,52 @@ const trust = [
 		}
 	}
 
-	/* Hasta que el 3D está listo se ve el póster. La tarjeta del slider ya está a la vista
-	   (sin hueco ni salto de layout); solo su control espera al 3D. */
-	.car-canvas,
-	.car-hint,
-	.car-slider-control {
-		visibility: hidden;
-	}
-
-	[data-hero][data-ready] .car-canvas,
-	[data-hero][data-ready] .car-hint,
-	[data-hero][data-ready] .car-slider-control {
-		visibility: visible;
-	}
-
-	@media (prefers-reduced-motion: no-preference) {
-		/* El póster espera 800 ms: si el 3D llega antes, entra el auto animado sin que
-		   el póster llegue a verse; si tarda más, el póster aparece y luego se cruza al 3D. */
-		:global(html.js) .car-fallback {
-			opacity: 0;
-			animation: poster-in 200ms 800ms forwards;
-		}
-	}
-
-	@keyframes poster-in {
-		to {
-			opacity: 1;
-		}
-	}
-
-	/* Sin JS no hay 3D que controlar: el slider no se muestra ni reserva espacio. */
-	:global(html:not(.js)) .car-slider {
-		display: none;
-	}
-
-	/* Sin WebGL (o si falla la carga) queda solo la imagen: el slider no ocupa espacio. */
-	[data-hero][data-static] .car-slider {
-		display: none;
-	}
-
-	.car-canvas :global(canvas) {
-		display: block;
-		width: 100%;
-		height: 100%;
-	}
-
 	@media (prefers-reduced-motion: reduce) {
-		.car-hint {
-			display: none;
+		.car-video {
+			transition: none;
 		}
-	}
-
-	.tint-slider {
-		--value: 0%;
-		display: block;
-		width: 100%;
-		height: 2.75rem;
-		appearance: none;
-		background: transparent;
-		cursor: pointer;
-	}
-
-	.tint-slider::-webkit-slider-runnable-track {
-		height: 0.5rem;
-		border-radius: 9999px;
-		background: linear-gradient(
-			to right,
-			var(--color-primary) var(--value),
-			var(--color-muted) var(--value)
-		);
-	}
-
-	.tint-slider::-moz-range-track {
-		height: 0.5rem;
-		border-radius: 9999px;
-		background: var(--color-muted);
-	}
-
-	.tint-slider::-moz-range-progress {
-		height: 0.5rem;
-		border-radius: 9999px;
-		background: var(--color-primary);
-	}
-
-	.tint-slider::-webkit-slider-thumb {
-		appearance: none;
-		width: 1.5rem;
-		height: 1.5rem;
-		margin-top: -0.5rem;
-		border: 3px solid var(--color-card);
-		border-radius: 9999px;
-		background: var(--color-primary);
-		box-shadow: var(--shadow-card);
-	}
-
-	.tint-slider::-moz-range-thumb {
-		width: 1.125rem;
-		height: 1.125rem;
-		border: 3px solid var(--color-card);
-		border-radius: 9999px;
-		background: var(--color-primary);
-		box-shadow: var(--shadow-card);
 	}
 </style>
 
 <script>
-	import { animate } from 'motion';
-
 	const root = document.querySelector<HTMLElement>('[data-hero]');
-	const host = root?.querySelector<HTMLElement>('[data-car-canvas]');
-	const slider = root?.querySelector<HTMLInputElement>('[data-tint-slider]');
-	const control = slider?.closest<HTMLElement>('[data-tint-control]');
-	const hint = root?.querySelector<HTMLElement>('[data-drag-hint]');
-	const poster = root?.querySelector<HTMLElement>('[data-car-fallback]');
+	const video = root?.querySelector<HTMLVideoElement>('[data-car-video]');
 	const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
 
-	/** Vuelve a la imagen estática: sin canvas, sin slider y con el póster a la vista. */
-	function showStatic(root: HTMLElement) {
-		delete root.dataset.ready;
-		root.dataset.static = '';
-		if (poster) poster.style.visibility = '';
-	}
-
-	async function start(root: HTMLElement, host: HTMLElement, slider: HTMLInputElement) {
-		const { createCarViewer, hasWebGL } = await import('../scripts/car-viewer');
-		if (!hasWebGL()) throw new Error('WebGL no disponible');
-
-		const viewer = await createCarViewer(host);
-		const ease = [0.22, 1, 0.36, 1] as const;
-
-		const valueText = (percent: number) => {
-			if (percent <= 0) return 'Vista referencial: lunas claras, sin oscurecer';
-			if (percent >= 100) return 'Vista referencial: lunas al máximo de oscuridad';
-			return `Vista referencial: lunas ${percent} de 100 en oscuridad`;
-		};
-		const setTint = (value: number) => {
-			viewer.setTint(value);
-			slider.style.setProperty('--value', `${value * 100}%`);
-			slider.setAttribute('aria-valuetext', valueText(Math.round(value * 100)));
-		};
-
-		// Si el póster aún no se ve (el 3D llegó en menos de ~800 ms), entrada completa.
-		// Si ya se ve, se cruza al 3D en la misma pose y con las lunas ya oscuras.
-		const posterShown = poster ? getComputedStyle(poster).opacity !== '0' : false;
-		let settled = !posterShown;
-		let intro: { stop(): void } | undefined;
-		root.dataset.ready = '';
-		root.dataset.entry = posterShown ? 'crossfade' : 'intro';
-
-		// Si el contexto WebGL se pierde, vuelve la imagen estática.
-		viewer.canvas.addEventListener('webglcontextlost', () => {
-			viewer.setRunning(false);
-			showStatic(root);
-		});
-
-		if (posterShown) {
-			slider.value = '100';
-			setTint(1);
-			viewer.render();
-			const settle = () => {
-				if (settled) return;
-				if (poster) poster.style.visibility = 'hidden';
-				settled = true;
-				sync();
-			};
-			animate(host, { opacity: [0, 1] }, { duration: 0.3, ease: 'linear' }).then(settle);
-			// Por si el fundido se cancela: el vaivén no debe quedarse esperando.
-			setTimeout(settle, 600);
-		} else {
-			if (poster) poster.style.visibility = 'hidden';
-			setTint(0);
-			// El auto entra con un desplazamiento corto y después se oscurecen las lunas (2 s en total).
-			animate(host, { opacity: [0, 1], x: [48, 0] }, { duration: 0.9, ease });
-			intro = animate(0, 1, {
-				duration: 1.1,
-				delay: 0.9,
-				ease: 'easeInOut',
-				onUpdate: (value) => {
-					slider.value = String(Math.round(value * 100));
-					setTint(value);
-				},
-			});
+	function start(root: HTMLElement, video: HTMLVideoElement) {
+		// 3:2 a 720p en móvil y tablet; 16:9 a 1080p desde lg. WebM (VP9) primero; MP4 de respaldo.
+		const name = window.matchMedia('(min-width: 64rem)').matches ? 'auto-wide-1080' : 'auto-720';
+		for (const [ext, type] of [
+			['webm', 'video/webm; codecs="vp9"'],
+			['mp4', 'video/mp4'],
+		]) {
+			const source = document.createElement('source');
+			source.src = `/hero/${name}.${ext}`;
+			source.type = type;
+			video.append(source);
 		}
 
-		if (control) animate(control, { opacity: [0, 1] }, { duration: 0.5, ease });
-		if (hint) animate(hint, { opacity: [0, 1] }, { duration: 0.5, ease, delay: 1 });
+		// Si el video falla o el navegador bloquea el autoplay, queda el póster.
+		const showPoster = () => delete root.dataset.playing;
+		video.addEventListener('playing', () => (root.dataset.playing = ''));
+		video.addEventListener('error', showPoster);
+		video.lastElementChild?.addEventListener('error', showPoster);
 
-		// La pista de arrastre desaparece con la primera interacción sobre el auto.
-		host.addEventListener(
-			'pointerdown',
-			() => {
-				if (!hint) return;
-				animate(hint, { opacity: 0 }, { duration: 0.3 }).then(() => hint.remove());
-			},
-			{ once: true },
-		);
-
-		// Pausa el render cuando el hero no está en pantalla o la pestaña está oculta.
-		// Durante el cruce desde el póster el auto se queda quieto (`settled`).
-		let onScreen = false;
-		function sync() {
-			viewer.setRunning(settled && onScreen && !document.hidden);
-		}
+		// Solo se reproduce mientras el hero está en pantalla.
 		new IntersectionObserver(([entry]) => {
-			onScreen = entry.isIntersecting;
-			sync();
+			if (entry.isIntersecting) video.play().catch(showPoster);
+			else video.pause();
 		}).observe(root);
-		document.addEventListener('visibilitychange', sync);
-
-		const stopIntro = () => intro?.stop();
-		slider.addEventListener('pointerdown', stopIntro);
-		slider.addEventListener('keydown', stopIntro);
-		slider.addEventListener('input', () => setTint(Number(slider.value) / 100));
 	}
 
-	if (root && host && slider && !reduceMotion) {
-		// Carga diferida: three y el modelo solo se piden cuando el auto entra en pantalla.
+	if (root && video && !reduceMotion && !saveData) {
+		// Carga diferida: el video solo se pide cuando el hero entra en pantalla.
 		const observer = new IntersectionObserver(
 			(entries) => {
 				if (!entries.some((entry) => entry.isIntersecting)) return;
 				observer.disconnect();
-				// Si algo falla (red, WebGL), queda la imagen estática.
-				start(root, host, slider).catch((error) => {
-					showStatic(root);
-					console.error(error);
-				});
+				start(root, video);
 			},
 			{ rootMargin: '200px' },
 		);
