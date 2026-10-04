@@ -36,11 +36,11 @@ const paraElDia = [
 	<div class="mt-10 grid gap-10 lg:mt-14 lg:grid-cols-2 lg:gap-0">
 		<div class="lg:pr-12">
 			<h3 data-reveal class="text-h3 font-semibold lg:text-h3-lg">Lo que nos envías para gestionar tu cita</h3>
-			<ul role="list" class="mt-6 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-4 lg:grid-cols-2">
+			<ul role="list" class="mt-6 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-4 lg:grid-cols-1 lg:gap-y-6">
 				{
 					paraGestionar.map((item) => (
-						<li data-reveal class="flex flex-col gap-3">
-							<span class="flex size-14 items-center justify-center rounded-full bg-muted">
+						<li data-reveal class="flex flex-col gap-3 lg:flex-row lg:items-center lg:gap-4">
+							<span class="flex size-14 shrink-0 items-center justify-center rounded-full bg-muted">
 								<Icon name={item.icon} size="md" class="text-primary-soft" />
 							</span>
 							<span class="max-w-xs font-semibold text-primary">{item.label}</span>
@@ -62,7 +62,7 @@ const paraElDia = [
 					))
 				}
 			</ul>
-			<p data-reveal class="mt-6 text-small text-muted-foreground">
+			<p data-reveal class="mt-6 text-small text-balance text-muted-foreground">
 				Los requisitos pueden cambiar. Te confirmamos la lista vigente por WhatsApp antes de tu cita.
 			</p>
 		</div>
