@@ -142,6 +142,46 @@
     border-color: var(--color-primary);
   }
 
+  /* Showroom: marino con luz cenital suave. Panel del auto (hero) y banda del CTA final. */
+  .showroom {
+    background:
+      radial-gradient(
+        ellipse 75% 60% at 50% 0%,
+        color-mix(in srgb, var(--color-on-primary) 24%, transparent),
+        transparent 70%
+      ),
+      linear-gradient(to bottom, var(--color-primary), var(--color-primary-deep));
+  }
+
+  /* Mockup ilustrativo (conversación de ejemplo): marco sin sombra, siempre rotulado. */
+  .mockup {
+    background-color: var(--color-muted);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    padding: 1rem;
+  }
+
+  /* Burbujas del mockup: entrante (nosotros) clara, saliente (cliente) marina. */
+  .bubble {
+    max-width: 85%;
+    border-radius: var(--radius-card);
+    padding: 0.75rem 1rem;
+  }
+
+  .bubble-in {
+    align-self: flex-start;
+    border: 1px solid var(--color-border);
+    border-bottom-left-radius: 0.25rem;
+    background-color: var(--color-card);
+  }
+
+  .bubble-out {
+    align-self: flex-end;
+    border-bottom-right-radius: 0.25rem;
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+  }
+
   /* Antetítulo de sección y del hero */
   .eyebrow {
     color: var(--color-primary-soft);

@@ -10,10 +10,12 @@ interface Props {
 	align?: 'left' | 'center';
 	/** id del título, para el `aria-labelledby` de la sección. */
 	titleId?: string;
+	/** Sobre la banda marina (CTA final): texto en on-primary. */
+	onDark?: boolean;
 	class?: string;
 }
 
-const { eyebrow, title, lead, level = 2, align = 'center', titleId, class: className } = Astro.props;
+const { eyebrow, title, lead, level = 2, align = 'center', titleId, onDark = false, class: className } = Astro.props;
 
 const Title = level === 1 ? 'h1' : 'h2';
 const centered = align === 'center';
@@ -24,12 +26,13 @@ const reveal = (index: number) =>
 ---
 
 <div class:list={[centered && 'md:text-center', className]}>
-	{eyebrow && <p {...reveal(0)} class="eyebrow">{eyebrow}</p>}
+	{eyebrow && <p {...reveal(0)} class:list={['eyebrow', onDark && 'text-on-primary/80']}>{eyebrow}</p>}
 	<Title
 		{...reveal(1)}
 		id={titleId}
 		class:list={[
 			'font-bold text-balance',
+			onDark && 'text-on-primary',
 			eyebrow && 'mt-3',
 			level === 1
 				? 'text-h1 xl:text-h2-lg xl:tall:text-h1-lg 2xl:tall:text-h1-xl'
@@ -43,7 +46,7 @@ const reveal = (index: number) =>
 			<p
 				{...reveal(2)}
 				class:list={[
-					'text-muted-foreground',
+					onDark ? 'text-on-primary/80' : 'text-muted-foreground',
 					level === 1 ? 'mt-4 max-w-lg 2xl:tall:max-w-xl 2xl:tall:text-lead' : 'mt-3 max-w-2xl',
 					centered && 'md:mx-auto',
 				]}
