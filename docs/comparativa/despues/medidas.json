@@ -1,0 +1,105 @@
+{
+	"commit": "rediseno-agentes (tras la Fase 4)",
+	"fecha": "2026-10-04",
+	"lighthouseMovil": {
+		"rendimiento": 98,
+		"accesibilidad": 100,
+		"buenasPracticas": 100,
+		"seo": 100,
+		"fcp": "1.5 s",
+		"lcp": "1.7 s",
+		"tbt": "120 ms",
+		"cls": 0,
+		"pesoTransferido": "607 KiB"
+	},
+	"build": {
+		"distKB": 9724,
+		"jsInicialBytes": 53242,
+		"jsInicialGzip": 19117,
+		"cssBytes": 37627,
+		"cssGzip": 8234
+	},
+	"viewports": [
+		{
+			"viewport": "375×812",
+			"altoPagina": 8904,
+			"pantallasDeScroll": 11.0,
+			"desbordeHorizontal": false,
+			"ctaWhatsApp": 8,
+			"waPrimerPantallazo": 2,
+			"pantallasSinCta": 0,
+			"pantallasSinCtaDeSeccion": 4,
+			"tactilesPequenos": [
+				"Saltar al contenido (1×1)"
+			],
+			"textosMedidos": 150,
+			"textosNoMedibles": 4,
+			"contrasteBajo": [],
+			"secciones": {
+				"hero": 952,
+				"por-que": 1208,
+				"como-funciona": 1501,
+				"requisitos": 1554,
+				"precios": 1330,
+				"faq": 1245,
+				"contacto": 432
+			},
+			"primerPrecioY": 861,
+			"primerPlazoY": 6418
+		},
+		{
+			"viewport": "768×1024",
+			"altoPagina": 6953,
+			"pantallasDeScroll": 6.8,
+			"desbordeHorizontal": false,
+			"ctaWhatsApp": 8,
+			"waPrimerPantallazo": 2,
+			"pantallasSinCta": 0,
+			"pantallasSinCtaDeSeccion": 2,
+			"tactilesPequenos": [
+				"Saltar al contenido (1×1)"
+			],
+			"textosMedidos": 152,
+			"textosNoMedibles": 4,
+			"contrasteBajo": [],
+			"secciones": {
+				"hero": 975,
+				"por-que": 810,
+				"como-funciona": 1361,
+				"requisitos": 1179,
+				"precios": 862,
+				"faq": 997,
+				"contacto": 352
+			},
+			"primerPrecioY": 912,
+			"primerPlazoY": 5082
+		},
+		{
+			"viewport": "1440×900",
+			"altoPagina": 6602,
+			"pantallasDeScroll": 7.3,
+			"desbordeHorizontal": false,
+			"ctaWhatsApp": 8,
+			"waPrimerPantallazo": 2,
+			"pantallasSinCta": 0,
+			"pantallasSinCtaDeSeccion": 1,
+			"tactilesPequenos": [
+				"Saltar al contenido (1×1)"
+			],
+			"textosMedidos": 161,
+			"textosNoMedibles": 4,
+			"contrasteBajo": [],
+			"secciones": {
+				"hero": 900,
+				"por-que": 840,
+				"como-funciona": 874,
+				"requisitos": 870,
+				"precios": 895,
+				"faq": 1028,
+				"contacto": 819
+			},
+			"primerPrecioY": 696,
+			"primerPlazoY": 4256
+		}
+	]
+}

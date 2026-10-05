@@ -1,6 +1,6 @@
 // Capturas por sección y medidas de la landing, para comparar antes/después del rediseño.
 // Se ejecuta con el MCP de Playwright (browser_run_code_unsafe, filename) con el servidor
-// de desarrollo en http://localhost:4321. Cambiar FASE a 'despues' para la segunda pasada.
+// de desarrollo en http://localhost:4321. FASE elige la carpeta de salida: 'antes' o 'despues'.
 async (page) => {
 	const FASE = 'antes';
 	const URL = 'http://localhost:4321/';
