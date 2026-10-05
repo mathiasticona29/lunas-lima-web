@@ -6,6 +6,8 @@ interface Props {
 	lead?: string;
 	/** 1 solo en el hero. */
 	level?: 1 | 2;
+	/** Etiqueta del título si difiere del nivel: `h1` en una página de texto, con la escala de sección. */
+	as?: 'h1' | 'h2';
 	/** center centra desde md; en móvil siempre va a la izquierda. */
 	align?: 'left' | 'center';
 	/** id del título, para el `aria-labelledby` de la sección. */
@@ -15,9 +17,9 @@ interface Props {
 	class?: string;
 }
 
-const { eyebrow, title, lead, level = 2, align = 'center', titleId, onDark = false, class: className } = Astro.props;
+const { eyebrow, title, lead, level = 2, as, align = 'center', titleId, onDark = false, class: className } = Astro.props;
 
-const Title = level === 1 ? 'h1' : 'h2';
+const Title = as ?? (level === 1 ? 'h1' : 'h2');
 const centered = align === 'center';
 
 // El hero (nivel 1) entra al cargar, con CSS; el resto, al hacer scroll (ver DESIGN.md).

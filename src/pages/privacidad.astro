@@ -1,0 +1,171 @@
+---
+import { whatsappUrl } from '../config';
+import Button from '../components/Button.astro';
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+
+const ctaUrl = whatsappUrl(
+	'Hola, quiero ejercer mis derechos sobre mis datos personales (acceso, rectificación, cancelación u oposición). Mi solicitud es:',
+);
+
+const datos = [
+	'DNI, por ambas caras',
+	'Fecha de emisión del DNI',
+	'Tarjeta de propiedad',
+	'Correo electrónico',
+	'Número de celular',
+	'Váucher de pago',
+	'El código de verificación que te llega al correo y que nos reenvías',
+];
+
+const derechos = [
+	{ nombre: 'Acceso', texto: 'saber qué datos tuyos tenemos.' },
+	{ nombre: 'Rectificación', texto: 'corregir datos que estén errados.' },
+	{ nombre: 'Cancelación', texto: 'pedir que eliminemos tus datos.' },
+	{ nombre: 'Oposición', texto: 'pedir que dejemos de usar tus datos.' },
+];
+---
+
+<Layout
+	title="Política de privacidad | Lunas Lima"
+	description="Qué datos personales pedimos, para qué los usamos, cuánto los conservamos y cómo ejercer tus derechos (Ley 29733)."
+>
+	<!-- Página de texto (DESIGN.md §2): el margen superior deja libre el navbar fijo. -->
+	<div class="bg-background pt-(--navbar-h)">
+		<Section aria-labelledby="privacidad-titulo">
+			<article class="legal mx-auto max-w-2xl">
+				<SectionHeader
+					as="h1"
+					align="left"
+					title="Política de privacidad"
+					lead="Aquí te explicamos qué datos tuyos recibimos para gestionar tu cita, qué hacemos con ellos y cómo puedes pedirnos acceso o eliminación."
+					titleId="privacidad-titulo"
+				/>
+				<p data-reveal class="mt-3 text-small text-muted-foreground">
+					Última actualización: <time datetime="2026-10-04">4 de octubre de 2026</time>
+				</p>
+
+				<section data-reveal>
+					<h2>Quiénes somos</h2>
+					<p>
+						Lunas Lima es un servicio privado de gestión de citas para el permiso de lunas polarizadas. Somos
+						responsables de los datos que nos envías al contratar la gestión.
+					</p>
+					<p>No somos la PNP ni actuamos en su nombre. El sistema de citas es de la PNP.</p>
+				</section>
+
+				<section data-reveal>
+					<h2>Qué datos te pedimos</h2>
+					<p>Para gestionar tu cita, te pedimos:</p>
+					<ul>
+						{datos.map((dato) => <li>{dato}</li>)}
+					</ul>
+				</section>
+
+				<section data-reveal>
+					<h2>Para qué los usamos</h2>
+					<p>
+						Solo para crear tu usuario y gestionar tu cita en el sistema de citas de la PNP. No los usamos para nada
+						más.
+					</p>
+				</section>
+
+				<section data-reveal>
+					<h2>Dónde se guardan</h2>
+					<p>
+						Tus datos quedan únicamente en el chat de WhatsApp que tienes con nosotros, y en las copias que WhatsApp
+						guarde en el dispositivo.
+					</p>
+				</section>
+
+				<section data-reveal>
+					<h2>Con quién se comparten</h2>
+					<p>
+						Solo con el sistema de citas de la PNP, cuando te registramos para tu cita. No vendemos ni cedemos tus
+						datos a nadie más.
+					</p>
+					<p>
+						WhatsApp (Meta) procesa los mensajes como plataforma. Lo que la PNP o Meta hagan con los datos en sus
+						propios sistemas no depende de nosotros; para eso, revisa sus propias políticas.
+					</p>
+				</section>
+
+				<section data-reveal>
+					<h2>Cuánto tiempo los conservamos</h2>
+					<p>Eliminamos tus datos 30 días después de la fecha de tu cita.</p>
+				</section>
+
+				<section data-reveal>
+					<h2>Tus derechos y cómo ejercerlos</h2>
+					<p>Conforme a la Ley N.º 29733, Ley de Protección de Datos Personales, tienes estos derechos:</p>
+					<ul>
+						{
+							derechos.map((derecho) => (
+								<li>
+									<strong>{derecho.nombre}:</strong> {derecho.texto}
+								</li>
+							))
+						}
+					</ul>
+					<p>Para ejercerlos, escríbenos por WhatsApp.</p>
+					<div class="mt-6">
+						<Button href={ctaUrl} whatsapp class="w-full sm:w-auto">Escríbenos por WhatsApp</Button>
+					</div>
+				</section>
+
+				<section data-reveal>
+					<h2>Cookies y analítica</h2>
+					<p>Esta web no usa cookies ni herramientas de analítica.</p>
+				</section>
+
+				<section data-reveal>
+					<h2>Cambios en esta política</h2>
+					<p>
+						Si cambiamos esta política, publicaremos la nueva versión en esta página y actualizaremos la fecha de
+						arriba.
+					</p>
+				</section>
+			</article>
+		</Section>
+	</div>
+</Layout>
+
+<style>
+	/* Texto corrido de la página (DESIGN.md §2 y §4): bloques separados con `mt-10`,
+	   subtítulos en la escala de H3 y viñetas nativas. */
+	.legal section {
+		margin-top: 2.5rem;
+	}
+
+	.legal h2 {
+		font-size: var(--text-h3);
+		line-height: var(--text-h3--line-height);
+		font-weight: 600;
+	}
+
+	.legal p,
+	.legal ul {
+		margin-top: 0.75rem;
+	}
+
+	.legal ul {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+		padding-left: 1.25rem;
+		list-style: disc;
+	}
+
+	.legal strong {
+		font-weight: 600;
+		color: var(--color-primary);
+	}
+
+	@media (min-width: 64rem) {
+		.legal h2 {
+			font-size: var(--text-h3-lg);
+			line-height: var(--text-h3-lg--line-height);
+		}
+	}
+</style>

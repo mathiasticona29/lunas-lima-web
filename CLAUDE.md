@@ -87,7 +87,16 @@ Footer (centrado desde md) con aviso "No somos la PNP" y enlace a /privacidad.
   asome la siguiente. El contenido de Cómo funciona, Requisitos y Precios cabe con su CTA en
   1440×900 (no en 1366×768); al añadir contenido, comprobarlo con clic en el navbar.
   Comparativa y Precios exceden ese mínimo en unos 21px de padding vacío; botón y nota caben.
-- /privacidad aún no existe; el footer y la FAQ ya enlazan a ella.
+- src/pages/privacidad.astro: política de privacidad (Ley 29733), página de texto (ver
+  DESIGN.md §2). El footer y la FAQ enlazan a `/privacidad/` (con barra final: Astro la
+  publica como privacidad/index.html). Datos confirmados que usa: qué se pide (DNI por ambas
+  caras, fecha de emisión, tarjeta de propiedad, correo, celular, váucher y código del
+  correo), solo para crear el usuario y la cita; se guardan solo en el chat de WhatsApp; se
+  comparten solo con el sistema de citas de la PNP; se eliminan 30 días después de la cita;
+  derechos ARCO por WhatsApp (no hay correo); la web no usa cookies ni analítica. Si cambia
+  algo de esto, actualizar la página y su fecha. No identifica al titular con razón social,
+  RUC ni domicilio: faltan esos datos.
+- SectionHeader admite `as="h1"` para el título de una página de texto (escala de sección).
 - WhatsAppFloat nace oculto (`data-hidden` en el HTML) y solo se muestra cuando no hay en
   pantalla ni el hero (`main [data-hero]`), ni un `main [data-wa-cta]` (`<Button whatsapp>`
   ya pone ese atributo), ni una sección con `data-wa-float-hide` (Precios). Sin JS no se

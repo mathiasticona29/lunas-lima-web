@@ -49,6 +49,14 @@ Si una sección necesita algo que no está aquí, primero se añade la regla y d
 - **Ancho de lectura:** párrafos sueltos con `max-w-2xl` como máximo; texto dentro de
   columnas con `max-w-xs`.
 - `flush` (sin padding ni contenedor) es solo para el hero.
+- **Página de texto** (`/privacidad`): una sola `Section` `background` dentro de un envoltorio
+  con `pt-(--navbar-h)`, que deja libre el navbar fijo (en la portada lo resuelve el hero).
+  El contenido va en un `<article>` `max-w-2xl` centrado, con todo el texto a la izquierda
+  también en escritorio. Cabecera con `SectionHeader as="h1" align="left"`; debajo, la fecha
+  de actualización como nota (`small`, `muted-foreground`, con `<time>`). Cada apartado es
+  un `<section data-reveal>` separado con `mt-10`: subtítulo `<h2>` en la escala de H3,
+  párrafos y listas con `mt-3`, viñetas nativas como en el acordeón (§6). Texto en
+  `foreground`; `<strong>` en `primary` 600. Un solo CTA, dentro del apartado al que sirve.
 
 ## 3. Ritmo de fondos
 
@@ -94,6 +102,8 @@ alineado con el logo, y la tarjeta flotante abajo a la derecha (§6).
 | Antetítulo (`.eyebrow`) | `small` 0.875rem | igual | Source Sans 600, mayúsculas, tracking 0.025em, `primary-soft` |
 | H1 (solo hero) | `h1` 2.125rem | `h1-lg` 3.25rem desde `xl`; `h1-xl` 3.75rem desde `2xl` (`h2-lg` si la pantalla es baja) | Lexend 700, `text-balance` |
 | H2 de sección | `h2` 1.625rem | `h2-lg` 2.25rem desde `lg` | Lexend 700, `text-balance` |
+| H1 de página de texto | igual que el H2 de sección | igual | `SectionHeader as="h1"`: cambia la etiqueta, no la escala |
+| Subtítulo de página de texto (`<h2>`) | `h3` 1.25rem | `h3-lg` 1.375rem desde `lg` | Lexend 600 |
 | H3 (ítem, tarjeta, paso) | `h3` 1.25rem | `h3-lg` 1.375rem desde `lg` | Lexend 600 |
 | Bajada | `body` 1.0625rem | `body-lg` 1.125rem desde `lg` | `muted-foreground`, `max-w-2xl` |
 | Bajada del hero | `body` | `body-lg`; `lead` 1.25rem desde `2xl` | `muted-foreground`, `max-w-lg` (`max-w-xl` desde `2xl`) |
