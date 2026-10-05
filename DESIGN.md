@@ -134,6 +134,10 @@ Siempre con `Button.astro`.
 - Sin tarjetas dentro de tarjetas. Sin hover de elevación en tarjetas que no son clicables.
 - Dentro de una tarjeta de dos columnas (precios), las columnas se separan con una línea
   `border` (`border-t` en móvil, `border-l` desde `md`), no con otra tarjeta.
+- El CTA de esa tarjeta es un solo botón y va al final en el DOM. En móvil cierra la
+  tarjeta, después de «Incluye» y «No incluye» y separado con `border-t` + `pt-6`: primero
+  se ve el alcance y después se pide escribir. Desde `md` la rejilla lo sube a la columna
+  izquierda, bajo el precio y los medios de pago, sin línea.
 
 ### Mockup de conversación (solo en «Cómo funciona»)
 
