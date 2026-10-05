@@ -3,8 +3,22 @@ import Icon from './Icon.astro';
 import Section from './Section.astro';
 import SectionHeader from './SectionHeader.astro';
 
-// Las respuestas admiten HTML (enlaces).
-const faqs = [
+interface FaqList {
+	/** Frase de entrada, terminada en dos puntos. */
+	intro: string;
+	items: string[];
+}
+
+interface Faq {
+	q: string;
+	/** Respuesta de un párrafo. Admite HTML (enlaces). */
+	a?: string;
+	/** Respuesta enumerada: una o más listas y una frase de cierre (ver DESIGN.md §6). */
+	lists?: FaqList[];
+	closing?: string;
+}
+
+const faqs: Faq[] = [
 	{
 		q: '¿Ustedes son la PNP?',
 		a: 'No. Somos un servicio privado de gestión: creamos tu usuario y tu cita, y te orientamos. No actuamos en nombre de la PNP ni tenemos vínculo oficial con ella.',
@@ -14,20 +28,32 @@ const faqs = [
 		a: 'La cita es gratuita. Lo que cobramos es nuestra gestión: S/ 30. La tasa oficial va aparte: son S/ 71.40, que pagas tú en el Banco de la Nación (código 08362) y debes tener lista antes de empezar.',
 	},
 	{
+		q: '¿Cómo pago?',
+		a: 'Puedes pagar la gestión por Yape, Plin o transferencia bancaria; te indicamos los datos por WhatsApp. La tasa oficial se paga aparte, directamente en el Banco de la Nación.',
+	},
+	{
+		q: '¿Cuánto demora conseguir la cita?',
+		a: 'Depende de la disponibilidad. Hoy las citas disponibles están a unos 2 a 3 meses. Te avisamos por WhatsApp apenas tengamos novedades.',
+	},
+	{
 		q: '¿Garantizan que me aprueben el permiso?',
 		a: 'No. La decisión es de la PNP y nadie puede asegurarla. Gestionamos tu cita y te orientamos para que llegues preparado.',
 	},
 	{
-		q: '¿Quién no puede obtener el permiso?',
-		a: 'Según el artículo 14 del D.S. 004-2019-IN, la PNP no otorga la autorización si el propietario tiene antecedentes policiales, penales o judiciales; denuncias activas y en trámite por accidentes de tránsito o como presunto autor de delitos contra el patrimonio, la libertad o la seguridad pública, de terrorismo o de tráfico ilícito de drogas; o una requisitoria o mandato de detención. Tampoco si el vehículo está requerido por mandato judicial, tiene orden de captura, tiene modificado, alterado o borrado el número de identificación de fábrica, o tiene vencidos sus documentos de porte obligatorio (salvo la licencia de conducir). Eso lo evalúa la PNP, no nosotros.',
+		q: 'Vivo fuera de Lima, ¿puedo hacer el trámite?',
+		a: 'La cita, el trámite y el peritaje son presenciales y solo en Lima, con tu vehículo. Si vives en otra ciudad, tendrás que viajar a Lima el día de tu cita. Por eso conviene elegir la fecha con calma; te orientamos antes de agendar.',
+	},
+	{
+		q: '¿Qué pasa si no puedo ir el día de mi cita?',
+		a: 'Nosotros no podemos reprogramar la cita. Si no puedes asistir, debes acercarte personalmente a informes en el local de la PNP. Para evitarlo, confirma tu disponibilidad antes de agendar y te ayudamos a elegir una fecha que te convenga.',
 	},
 	{
 		q: '¿Puedo hacerlo yo mismo?',
 		a: 'Sí, puedes hacer el trámite por tu cuenta. Nuestro servicio es para quien prefiere que otros se encarguen del registro y lo orienten.',
 	},
 	{
-		q: '¿Cuánto demora conseguir la cita?',
-		a: 'Depende de la disponibilidad. Hoy las citas disponibles están a unos 2 a 3 meses. Te avisamos por WhatsApp apenas tengamos novedades.',
+		q: '¿Qué pasa con mis datos personales?',
+		a: 'Los usamos solo para gestionar tu cita, conforme a la Ley 29733 de protección de datos personales. Detalles en nuestra <a href="/privacidad">política de privacidad</a>.',
 	},
 	{
 		q: '¿Por qué necesitan un código de mi correo?',
@@ -38,20 +64,28 @@ const faqs = [
 		a: 'El sistema puede demorar. Espera y no pidas otro, porque se puede trabar. Escríbenos por WhatsApp y te avisamos qué hacer.',
 	},
 	{
-		q: '¿Cómo pago?',
-		a: 'Puedes pagar la gestión por Yape, Plin o transferencia bancaria; te indicamos los datos por WhatsApp. La tasa oficial se paga aparte, directamente en el Banco de la Nación.',
-	},
-	{
-		q: '¿Qué pasa con mis datos personales?',
-		a: 'Los usamos solo para gestionar tu cita, conforme a la Ley 29733 de protección de datos personales. Detalles en nuestra <a href="/privacidad">política de privacidad</a>.',
-	},
-	{
-		q: 'Vivo fuera de Lima, ¿puedo hacer el trámite?',
-		a: 'La cita, el trámite y el peritaje son presenciales y solo en Lima, con tu vehículo. Si vives en otra ciudad, tendrás que viajar a Lima el día de tu cita. Por eso conviene elegir la fecha con calma; te orientamos antes de agendar.',
-	},
-	{
-		q: '¿Qué pasa si no puedo ir el día de mi cita?',
-		a: 'Nosotros no podemos reprogramar la cita. Si no puedes asistir, debes acercarte personalmente a informes en el local de la PNP. Para evitarlo, confirma tu disponibilidad antes de agendar y te ayudamos a elegir una fecha que te convenga.',
+		// Resumen del art. 14 del D.S. 004-2019-IN: no añadir, quitar ni reformular supuestos.
+		q: '¿Quién no puede obtener el permiso?',
+		lists: [
+			{
+				intro: 'Según el artículo 14 del D.S. 004-2019-IN, la PNP no otorga la autorización si el propietario tiene:',
+				items: [
+					'antecedentes policiales, penales o judiciales;',
+					'denuncias activas y en trámite por accidentes de tránsito o como presunto autor de delitos contra el patrimonio, la libertad o la seguridad pública, de terrorismo o de tráfico ilícito de drogas;',
+					'una requisitoria o mandato de detención.',
+				],
+			},
+			{
+				intro: 'Tampoco si el vehículo:',
+				items: [
+					'está requerido por mandato judicial;',
+					'tiene orden de captura;',
+					'tiene modificado, alterado o borrado el número de identificación de fábrica;',
+					'tiene vencidos sus documentos de porte obligatorio (salvo la licencia de conducir).',
+				],
+			},
+		],
+		closing: 'Eso lo evalúa la PNP, no nosotros.',
 	},
 ];
 ---
@@ -72,7 +106,23 @@ const faqs = [
 						<span class="text-body lg:text-h3">{faq.q}</span>
 						<Icon name="chevron-down" class="faq-chevron text-primary-soft" />
 					</summary>
-					<p class="faq-answer max-w-2xl pb-5 text-muted-foreground" set:html={faq.a} />
+					{faq.lists ? (
+						<div class="faq-answer flex max-w-2xl flex-col gap-4 pb-5 text-muted-foreground">
+							{faq.lists.map((list) => (
+								<div>
+									<p>{list.intro}</p>
+									<ul class="mt-2 flex list-disc flex-col gap-1 pl-5">
+										{list.items.map((item) => (
+											<li>{item}</li>
+										))}
+									</ul>
+								</div>
+							))}
+							{faq.closing && <p>{faq.closing}</p>}
+						</div>
+					) : (
+						<p class="faq-answer max-w-2xl pb-5 text-muted-foreground" set:html={faq.a} />
+					)}
 				</details>
 			))
 		}

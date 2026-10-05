@@ -173,6 +173,11 @@ Muestra el producto real: una conversación corta que termina en la captura de l
 - Acordeón: `<details>` nativo, sin JS ni tarjeta. Filas con `border-t`, `<summary>` de
   alto mínimo 3.5rem con ícono `chevron-down` que gira 180° (180 ms, sin giro animado con
   movimiento reducido). Respuesta en `muted-foreground`, `max-w-2xl`. Ancho `max-w-3xl`.
+- Enumeración dentro de una respuesta del acordeón (supuestos o condiciones, no beneficios):
+  `<ul>` con viñetas nativas (`list-disc`, `pl-5`, `gap-1`), sin íconos, en el mismo
+  `muted-foreground` de la respuesta. Cada lista va tras su frase de entrada (`mt-2`); los
+  bloques de la respuesta (lista con su entrada, frase de cierre) se separan con `gap-4`.
+  No lleva `role="list"`, tarjeta, rojo ni `check`: no es una lista de verificación.
 
 ## 7. Íconos
 
