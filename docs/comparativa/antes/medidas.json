@@ -22,8 +22,8 @@
 	"viewports": [
 		{
 			"viewport": "375×812",
-			"altoPagina": 9240,
-			"pantallasDeScroll": 11.4,
+			"altoPagina": 9077,
+			"pantallasDeScroll": 11.2,
 			"desbordeHorizontal": false,
 			"ctaWhatsApp": 7,
 			"waPrimerPantallazo": 2,
@@ -33,7 +33,7 @@
 			"textosMedidos": 145,
 			"textosNoMedibles": 4,
 			"contrasteBajo": [],
-			"secciones": { "hero": 1246, "por-que": 1159, "como-funciona": 1528, "requisitos": 1581, "precios": 1338, "faq": 1273, "contacto": 432 }
+			"secciones": { "hero": 1246, "por-que": 1132, "como-funciona": 1501, "requisitos": 1554, "precios": 1284, "faq": 1245, "contacto": 432 }
 		},
 		{
 			"viewport": "768×1024",

@@ -15,10 +15,10 @@ async (page) => {
 		await page.evaluate(async () => {
 			const step = Math.round(window.innerHeight * 0.6);
 			for (let y = 0; y < document.documentElement.scrollHeight; y += step) {
-				window.scrollTo(0, y);
+				window.scrollTo({ top: y, behavior: 'instant' });
 				await new Promise((r) => setTimeout(r, 120));
 			}
-			window.scrollTo(0, 0);
+			window.scrollTo({ top: 0, behavior: 'instant' });
 		});
 		await page.waitForTimeout(1500);
 	};
@@ -50,14 +50,14 @@ async (page) => {
 			let pantallasSinCta = 0;
 			let pantallasSinCtaDeSeccion = 0;
 			for (let i = 0; i < screens; i++) {
-				window.scrollTo(0, i * vh);
+				window.scrollTo({ top: i * vh, behavior: 'instant' });
 				await new Promise((r) => setTimeout(r, 450));
 				const visibles = wa.filter(inViewport);
 				if (i === 0) waPrimerPantallazo = visibles.length;
 				if (visibles.length === 0) pantallasSinCta++;
 				if (visibles.filter((el) => !float(el) && !el.closest('header')).length === 0) pantallasSinCtaDeSeccion++;
 			}
-			window.scrollTo(0, 0);
+			window.scrollTo({ top: 0, behavior: 'instant' });
 			await new Promise((r) => setTimeout(r, 300));
 
 			// Áreas táctiles menores de 44 × 44 px (se excluyen los enlaces dentro de un texto).
@@ -157,8 +157,13 @@ async (page) => {
 	for (const vp of VIEWPORTS) {
 		await page.setViewportSize(vp);
 		await page.goto(URL, { waitUntil: 'networkidle' });
-		// La barra de desarrollo de Astro es fija y se colaría en las capturas.
-		await page.addStyleTag({ content: 'astro-dev-toolbar { display: none !important; }' });
+		// La barra de desarrollo de Astro es fija y se colaría en las capturas. La barra de
+		// scroll clásica del navegador de escritorio resta 15px de ancho útil (375 → 360) y
+		// desaparece al capturar, lo que descuadra los recortes: se quita para medir y capturar
+		// con el ancho real, como en un móvil.
+		await page.addStyleTag({
+			content: 'astro-dev-toolbar { display: none !important; } html { scrollbar-width: none; }',
+		});
 		await page.waitForTimeout(2500);
 		await revealAll();
 
