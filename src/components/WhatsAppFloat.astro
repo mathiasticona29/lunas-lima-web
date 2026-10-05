@@ -26,7 +26,8 @@ import { whatsappUrl } from '../config';
 	}
 
 	/* Nace oculto (`data-hidden` viene en el HTML, así no parpadea al cargar) y el script lo
-	   muestra cuando ni el hero ni un CTA de WhatsApp de la página están en pantalla.
+	   muestra cuando no hay en pantalla ni el hero, ni un CTA de WhatsApp de la página, ni
+	   una sección marcada con `data-wa-float-hide` (Precios: en móvil pisaba la tarjeta).
 	   `visibility: hidden` lo saca también del foco y de los clics. Sin JS no se muestra:
 	   el botón de WhatsApp del navbar fijo sigue disponible. */
 	.whatsapp-float[data-hidden] {
@@ -39,7 +40,7 @@ import { whatsappUrl } from '../config';
 	const float = document.querySelector<HTMLElement>('[data-wa-float]');
 
 	if (float) {
-		const targets = document.querySelectorAll('main [data-hero], main [data-wa-cta]');
+		const targets = document.querySelectorAll('main [data-hero], main [data-wa-float-hide], main [data-wa-cta]');
 		const visible = new Set<Element>();
 		const observer = new IntersectionObserver((entries) => {
 			for (const entry of entries) {
