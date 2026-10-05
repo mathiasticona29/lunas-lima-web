@@ -1,7 +1,11 @@
 ---
+import { whatsappUrl } from '../config';
+import Button from './Button.astro';
 import Icon from './Icon.astro';
 import Section from './Section.astro';
 import SectionHeader from './SectionHeader.astro';
+
+const ctaUrl = whatsappUrl('Hola, vi su página y quiero que gestionen mi cita para lunas polarizadas.');
 
 const pairs = [
 	{
@@ -58,7 +62,11 @@ const pairs = [
 				))
 			}
 		</ul>
-		<p data-reveal class="mt-6 text-small text-muted-foreground md:text-center">
+	</div>
+
+	<div data-reveal class="mt-10 flex flex-col items-start gap-3 md:items-center">
+		<Button href={ctaUrl} whatsapp class="w-full sm:w-auto">Pide tu cita con nosotros</Button>
+		<p class="text-small text-muted-foreground">
 			La decisión final siempre es de la PNP; nosotros gestionamos y orientamos.
 		</p>
 	</div>
