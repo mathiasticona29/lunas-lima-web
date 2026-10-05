@@ -8,6 +8,7 @@ import { whatsappUrl } from '../config';
 	rel="noopener noreferrer"
 	aria-label="Escríbenos por WhatsApp"
 	data-wa-float
+	data-hidden
 	class="whatsapp-float fixed z-40 flex size-14 items-center justify-center rounded-full bg-whatsapp text-white shadow-card transition-transform duration-200 ease-out-soft hover:scale-105 active:scale-95 motion-reduce:transition-none motion-reduce:hover:scale-100 motion-reduce:active:scale-100"
 >
 	<svg viewBox="0 0 24 24" class="size-7" fill="currentColor" aria-hidden="true">
@@ -24,7 +25,10 @@ import { whatsappUrl } from '../config';
 		transition-property: transform, opacity, visibility;
 	}
 
-	/* Oculto mientras un CTA de WhatsApp de la página está en pantalla, para no taparlo. */
+	/* Nace oculto (`data-hidden` viene en el HTML, así no parpadea al cargar) y el script lo
+	   muestra cuando ni el hero ni un CTA de WhatsApp de la página están en pantalla.
+	   `visibility: hidden` lo saca también del foco y de los clics. Sin JS no se muestra:
+	   el botón de WhatsApp del navbar fijo sigue disponible. */
 	.whatsapp-float[data-hidden] {
 		visibility: hidden;
 		opacity: 0;
@@ -33,9 +37,9 @@ import { whatsappUrl } from '../config';
 
 <script>
 	const float = document.querySelector<HTMLElement>('[data-wa-float]');
-	const ctas = document.querySelectorAll('main [data-wa-cta]');
 
-	if (float && ctas.length > 0) {
+	if (float) {
+		const targets = document.querySelectorAll('main [data-hero], main [data-wa-cta]');
 		const visible = new Set<Element>();
 		const observer = new IntersectionObserver((entries) => {
 			for (const entry of entries) {
@@ -44,6 +48,7 @@ import { whatsappUrl } from '../config';
 			}
 			float.toggleAttribute('data-hidden', visible.size > 0);
 		});
-		ctas.forEach((cta) => observer.observe(cta));
+		targets.forEach((target) => observer.observe(target));
+		if (targets.length === 0) float.removeAttribute('data-hidden');
 	}
 </script>

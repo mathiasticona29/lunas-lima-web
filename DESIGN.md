@@ -113,6 +113,10 @@ Siempre con `Button.astro`.
 - `whatsapp`: añade el ícono, abre en pestaña nueva, avisa a lectores de pantalla y pone
   `data-wa-cta` (oculta el botón flotante mientras el CTA está en pantalla). La URL sale
   siempre de `whatsappUrl()` en `src/config.ts`.
+- Botón flotante (`WhatsAppFloat.astro`): nace oculto desde el HTML (`data-hidden`) y el
+  script lo muestra solo cuando no hay en pantalla ni el hero (`main [data-hero]`) ni un
+  `main [data-wa-cta]`. Oculto no recibe foco ni clics (`visibility: hidden`). Sin JS no
+  se muestra: el botón de WhatsApp del navbar fijo sigue disponible.
 - En móvil el CTA de cierre de sección ocupa todo el ancho (`w-full sm:w-auto`).
 - Dos botones juntos: `gap-3`, primario primero. El verde de WhatsApp es solo del botón
   flotante; los CTA de las secciones son ámbar.
