@@ -43,10 +43,10 @@ Footer (centrado desde md) con aviso "No somos la PNP" y enlace a /privacidad.
   public/hero/, póster .webp) y texto sobre un panel marino semitransparente. Por debajo
   de lg mide lo que su contenido (sin alto mínimo) y termina en la línea de precio y aviso;
   la tarjeta «Llega preparado al trámite» solo existe desde lg, flotando abajo a la derecha.
-  HeroVideoPanel.astro es una variante que no se monta.
 - archive/: el hero anterior con auto 3D (Hero3D.astro, car-viewer.ts, auto.glb, draco/ y
-  auto-fallback.webp). No se publica ni lo revisa `astro check`; ver archive/README.md
-  (cómo restaurarlo y el crédito CC BY que exige el modelo si vuelve a publicarse).
+  auto-fallback.webp) y la variante HeroVideoPanel.astro. No se publica ni lo revisa
+  `astro check`; `three` ya no está en package.json. Ver archive/README.md (cómo
+  restaurarlo y el crédito CC BY que exige el modelo si vuelve a publicarse).
 - Componentes compartidos (ver DESIGN.md): Section.astro (fondo `tone`, padding,
   contenedor; `flush` solo para el hero), SectionHeader.astro (antetítulo + título +
   bajada), Button.astro (`variant`, `size`, `whatsapp`) e Icon.astro (íconos de línea;

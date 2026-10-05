@@ -52,12 +52,22 @@ Si una sección necesita algo que no está aquí, primero se añade la regla y d
 
 ## 3. Ritmo de fondos
 
-Las secciones alternan `background` y `card`. El panel del hero y el CTA final son las
-únicas superficies oscuras, y comparten la clase `.showroom` (marino con luz cenital).
+Las secciones alternan `background` y `card`. El hero y el CTA final son las únicas
+superficies oscuras: el hero es un video sobre `primary-deep` y el CTA final usa la clase
+`.showroom` (marino con luz cenital).
+
+Hero (`Hero.astro`, `flush`): el video del auto va a sangre bajo el navbar, con su primer
+cuadro como póster (`<picture>`; es lo único que se ve con movimiento reducido, sin JS o si
+el video falla). El texto va en un panel `primary-deep` al 72 % para leerse sobre cualquier
+cuadro; dentro de él el foco es `on-primary` y la acción de apoyo usa el botón `dark`.
+En móvil y tablet el video ocupa el ancho en 3:2, se funde con el marino y el texto sigue
+debajo; el hero mide lo que su contenido. Desde `lg` el video llena el hero, que ocupa toda
+la primera pantalla (`min-height: max(40rem, 100svh)`), con el texto a la izquierda,
+alineado con el logo, y la tarjeta flotante abajo a la derecha (§6).
 
 | Sección | `tone` | Contenido |
 |---|---|---|
-| Hero | `background` | Panel showroom con el auto |
+| Hero | video sobre `primary-deep` | Video del auto, panel de texto y tarjeta flotante desde `lg` |
 | Por tu cuenta o con nosotros | `card` | Filas comparativas separadas con líneas |
 | Cómo funciona | `background` | Pasos + mockup de conversación |
 | Requisitos | `card` | Dos listas separadas con una línea |
@@ -75,7 +85,7 @@ Las secciones alternan `background` y `card`. El panel del hero y el CTA final s
 - Sobre `primary` el texto va en `on-primary` (`SectionHeader` con `onDark`; bajada y
   notas en `on-primary/80`) y el botón sigue siendo ámbar. Sin tarjetas.
 - `muted` como fondo de sección está reservado al footer; dentro de las secciones se usa
-  para superficies pequeñas (marcadores de ícono, pista del slider, hover del botón secundario).
+  para superficies pequeñas (marcadores de ícono, hover del botón secundario).
 
 ## 4. Escala de títulos
 
@@ -126,7 +136,7 @@ Siempre con `Button.astro`.
 ## 6. Tarjetas
 
 - Clase `.card`: fondo `card`, borde 1px `border`, `rounded-card`, `shadow-card`,
-  padding 1.5rem (`p-4` en tarjetas compactas, como la del slider).
+  padding 1.5rem.
 - `.card-featured` (borde `primary`) solo para la tarjeta destacada de precios.
 - Las tarjetas van sobre fondo `background` o sobre el panel marino. En una sección
   `card` el contenido no se mete en tarjetas: se separa con espacio o con líneas `border`.
@@ -202,7 +212,7 @@ Siempre con `Icon.astro`: de línea, grilla de 24, sin relleno, puntas y uniones
 |---|---|---|
 | `rounded-button` | 0.75rem | Botones y controles |
 | `rounded-card` | 1rem | Tarjetas, marco del mockup y burbujas |
-| `rounded-panel` | 1.5rem | Paneles grandes a sangre (panel del auto) |
+| `rounded-panel` | 1.5rem | Paneles grandes a sangre (hoy sin uso) |
 | `rounded-full` | — | Marcadores, insignias, botón flotante |
 
 - Una sola sombra: `shadow-card`. La llevan las tarjetas y el botón flotante; nada más.
@@ -222,7 +232,8 @@ Un solo patrón, a cargo de `src/scripts/reveal.ts` (cargado en `Layout.astro`).
   en el escalonado), en CSS puro y con el mismo movimiento, para que el H1 pinte sin
   esperar al JS. Lo que está bajo el pliegue usa siempre `data-reveal`.
 - No se escribe un script de aparición por sección ni se anima `width`, `height` o
-  `margin`. Sin parallax ni animaciones en bucle; la única excepción es el vaivén del auto.
+  `margin`. Sin parallax ni animaciones en bucle; la única excepción es el video del hero,
+  que no se carga con movimiento reducido.
 - Transiciones de estado (hover, foco, presión): 180–200 ms `ease-out-soft`.
 
 ## 10. Color y accesibilidad
@@ -236,7 +247,7 @@ Un solo patrón, a cargo de `src/scripts/reveal.ts` (cargado en `Layout.astro`).
 
 ## 11. Verificación
 
-Capturar en 375, 768 y 1440px. El hero, además, en 1920px: su alto tiene tope
-(`clamp(40rem, 100svh, 54rem)` desde `lg`) y la sección siguiente debe asomar.
+Capturar en 375, 768 y 1440px. El hero, además, en 1920px: desde `lg` ocupa toda la
+primera pantalla, sin tope de alto, y la sección siguiente no debe asomar.
 Revisarlo también en 1280×720: con menos de 52rem de alto (variante `tall:`) el hero
 usa título y espaciado compactos para que el texto no quede bajo el pliegue.

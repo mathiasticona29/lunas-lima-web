@@ -118,8 +118,8 @@ teórico, blanco puro detrás del panel, da 5,26:1).
 - Las capturas `despues/footer-*.png` ya son sin el crédito. Los altos de página de la tabla
   se midieron antes de quitarlo: el footer es ahora unos 60 px más bajo en móvil.
 - `CLAUDE.md` describe ya el hero con video y el verde real de WhatsApp (`#128c7e`).
-- `HeroVideoPanel.astro` sigue en `src/components/` sin montarse y con la etiqueta antigua.
-- `DESIGN.md` aún menciona el slider y el «panel showroom con el auto» del hero 3D.
+- `HeroVideoPanel.astro` (variante sin montar) también pasó a `archive/`; se desinstalaron
+  `three` y `@types/three`; `DESIGN.md` describe solo el hero de video.
 
 ## Cómo medir la conversión real
 
