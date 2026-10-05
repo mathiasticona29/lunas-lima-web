@@ -5,6 +5,8 @@ import Icon from './Icon.astro';
 import Section from './Section.astro';
 import SectionHeader from './SectionHeader.astro';
 
+const ctaUrl = whatsappUrl('Hola, quiero pedir mi cita para el permiso de lunas polarizadas. ¿Qué necesito para empezar?');
+
 const trust = [
 	{ icon: 'chat', label: 'Todo por WhatsApp' },
 	{ icon: 'calendar-check', label: 'Cita con captura' },
@@ -74,7 +76,7 @@ const prep = [
 				style="--reveal-i: 3"
 				class="mt-6 flex flex-col gap-3 whitespace-nowrap sm:flex-row sm:items-center lg:flex-col lg:items-start xl:flex-row xl:flex-wrap xl:items-center"
 			>
-				<Button href={whatsappUrl()} whatsapp class="px-4 sm:px-6">Agenda tu cita por WhatsApp</Button>
+				<Button href={ctaUrl} whatsapp class="px-4 sm:px-6">Pide tu cita por WhatsApp</Button>
 				<Button href="#requisitos" variant="dark">Ver requisitos</Button>
 			</div>
 

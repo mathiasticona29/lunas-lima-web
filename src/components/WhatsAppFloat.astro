@@ -1,12 +1,14 @@
 ---
 import { whatsappUrl } from '../config';
+
+const ctaUrl = whatsappUrl('Hola, estaba viendo su página y tengo una consulta sobre el permiso de lunas polarizadas');
 ---
 
 <a
-	href={whatsappUrl()}
+	href={ctaUrl}
 	target="_blank"
 	rel="noopener noreferrer"
-	aria-label="Escríbenos por WhatsApp"
+	aria-label="Pide tu cita por WhatsApp"
 	data-wa-float
 	data-hidden
 	class="whatsapp-float fixed z-40 flex size-14 items-center justify-center rounded-full bg-whatsapp text-white shadow-card transition-transform duration-200 ease-out-soft hover:scale-105 active:scale-95 motion-reduce:transition-none motion-reduce:hover:scale-100 motion-reduce:active:scale-100"
