@@ -27,46 +27,26 @@
   hoy `#128c7e`) solo en el botón flotante.
 
 ## Secciones
-Navbar → Hero con auto 3D (oscurecido automático al cargar + slider Claras↔Oscuras)
+Navbar → Hero con video del auto (texto sobre panel marino semitransparente)
 → Por tu cuenta o con nosotros (comparativa) → Cómo funciona (3 pasos + mockup de
 conversación de ejemplo) → Requisitos → Precios → FAQ → CTA final (banda showroom).
-Footer (centrado desde md) con aviso "No somos la PNP", crédito del modelo 3D y enlace
-a /privacidad.
+Footer (centrado desde md) con aviso "No somos la PNP" y enlace a /privacidad.
 
 ## Stack y archivos clave
-- Astro + Tailwind + Motion (vanilla JS) + Three.js. Sitio estático.
+- Astro + Tailwind + Motion (vanilla JS). Sitio estático.
 - src/config.ts: número de WhatsApp y mensaje predeterminado. Todos los CTA lo usan.
 - src/components/Navbar.astro: header fijo (logo de texto «Lunas Lima», enlaces a
   #como-funciona, #requisitos, #precios y #faq, botón de WhatsApp y menú móvil).
   Se monta en Layout.astro. Navbar y hero usan `.container-wide` (100rem, gutter de 4rem
   desde 1440px); la columna de texto del hero se alinea con el logo y deja 3rem antes del panel.
-- OJO: el hero que se monta hoy (src/components/Hero.astro) es un panel con VIDEO
-  (`[data-car-video]`, archivos en public/hero/) y texto sobre un panel marino
-  semitransparente. Por debajo de lg mide lo que su contenido (sin alto mínimo) y termina en
-  la línea de precio y aviso; la tarjeta «Llega preparado al trámite» solo existe desde lg,
-  flotando abajo a la derecha. Lo que sigue sobre el auto 3D, el slider y car-viewer.ts
-  describe Hero3D.astro, que ya no se monta (tampoco HeroVideoPanel.astro); está pendiente
-  de reescribir.
-- src/components/Hero3D.astro + src/scripts/car-viewer.ts: hero y visor 3D (no montado).
-  Alto: 100svh en móvil; desde lg tiene tope, `clamp(40rem, 100svh, 54rem)`, para que en
-  pantallas altas asome la sección siguiente. Escritorio: texto ~42 % claro / panel showroom ~54 % (degradado
-  --color-primary → --color-primary-deep con luz cenital) a sangre por la derecha y por
-  abajo, debajo del navbar; la tarjeta del slider flota abajo a la derecha del panel.
-  Móvil: panel con el auto arriba, tarjeta montada sobre su borde y texto debajo.
-  El auto hace un vaivén de ±20° (no gira 360°) y se puede arrastrar; la pista
-  «Arrastra para girar» se quita con la primera interacción.
-- Carga del 3D: el póster (auto-fallback.webp) aparece a los 800 ms si el 3D aún no está.
-  Si el 3D llega antes de que el póster se vea, entrada completa (desplazamiento del auto
-  y luego oscurecido de lunas, 2 s). Si el póster ya se ve, cruce de 0,3 s a 3D en la
-  misma pose y con las lunas ya oscuras. Con movimiento reducido, sin JS o sin WebGL
-  queda solo el póster.
-- public/auto-fallback.webp es cuadrada (1200×1200), con fondo transparente, y se genera
-  desde el propio visor (pose central, lunas oscuras): debe coincidir con el primer frame
-  del 3D. Regenerarla si cambia el encuadre, la luz, el piso o los materiales.
-- Visor: luz cenital + entorno atenuado (sin luces frontales ni rasantes: blanquean las
-  lunas), pintura plateada metálica, charco de luz y reflejo espejado del auto en el piso.
-- Lunas tintadas: dieléctrico (metalness 0) con envMap propio casi apagado. Ojo:
-  `envMapIntensity` no afecta al entorno de la escena, solo al envMap del material.
+- src/components/Hero.astro: hero con video del auto (`[data-car-video]`, archivos en
+  public/hero/, póster .webp) y texto sobre un panel marino semitransparente. Por debajo
+  de lg mide lo que su contenido (sin alto mínimo) y termina en la línea de precio y aviso;
+  la tarjeta «Llega preparado al trámite» solo existe desde lg, flotando abajo a la derecha.
+  HeroVideoPanel.astro es una variante que no se monta.
+- archive/: el hero anterior con auto 3D (Hero3D.astro, car-viewer.ts, auto.glb, draco/ y
+  auto-fallback.webp). No se publica ni lo revisa `astro check`; ver archive/README.md
+  (cómo restaurarlo y el crédito CC BY que exige el modelo si vuelve a publicarse).
 - Componentes compartidos (ver DESIGN.md): Section.astro (fondo `tone`, padding,
   contenedor; `flush` solo para el hero), SectionHeader.astro (antetítulo + título +
   bajada), Button.astro (`variant`, `size`, `whatsapp`) e Icon.astro (íconos de línea;
@@ -112,14 +92,6 @@ a /privacidad.
   pantalla ni el hero (`main [data-hero]`), ni un `main [data-wa-cta]` (`<Button whatsapp>`
   ya pone ese atributo), ni una sección con `data-wa-float-hide` (Precios). Sin JS no se
   muestra: queda el botón del navbar.
-- public/auto.glb (Draco), decoders en public/draco/, fallback en public/auto-fallback.webp.
-- Modelo 3D: solo se oscurece el material "Glass_ext-tinted" (lunas laterales y
-  posterior). "Glass_ext" es el parabrisas y queda claro. No tocar faros (Glass_-_Clear*,
-  Glass_-_Red*).
-- Carrocería: plateado claro (#c9ced6), aplicado por código en car-viewer.ts sobre el
-  material "Car_Paint_-_All_Colors" (se quita su textura de color; el .glb no cambia).
-  Si cambia el color, regenerar public/auto-fallback.webp.
-- Crédito: «Generic Sedan Car» de Márcio Meireles (Sketchfab), CC BY 4.0.
 - auto-original.glb y videos-originales/ (videos de stock sin optimizar) están en
   .gitignore; nunca subirlos.
 
@@ -135,13 +107,11 @@ a /privacidad.
   etiqueta v1-antes-rediseno, RESUMEN.md y capturar.js (se ejecuta con el MCP de
   Playwright). Al medir o capturar: quitar la barra de scroll (`scrollbar-width: none`,
   resta 15px de ancho) y usar scroll instantáneo (la página tiene `scroll-behavior: smooth`).
-- Pendiente del rediseño: quitar peso al botón «Ver requisitos» del hero (hace falta una
-  variante de contorno claro; `secondary` no cumple contraste sobre el panel).
 - Antes de cambios grandes, presenta un plan y espera aprobación.
 - Después de cada cambio visual, usa Playwright para abrir http://localhost:4321,
   capturar en 375px, 768px y 1440px, revisar y corregir antes de dar la tarea por terminada.
 - Ojo con las capturas: los revisores pueden dejar el navegador de Playwright con
-  movimiento reducido emulado (sin 3D ni slider); restablecerlo antes de capturar.
+  movimiento reducido emulado (el hero queda con el póster, sin video); restablecerlo antes de capturar.
 - Verificación visual: máximo 2 rondas de capturas por tarea. Si algo sigue mal,
   detente y explícame el problema.
 - Ejecuta `npx astro check` y `npm run build` al terminar; no entregues con errores.

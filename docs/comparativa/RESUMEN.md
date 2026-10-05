@@ -77,12 +77,12 @@ No se tocó `src/config.ts`: el número es el mismo y todos los mensajes pasan p
 S/ 71.40, plazo, medios de pago, solo Lima, no reprogramación) aparecen con los mismos
 valores.
 
-## Lo que no se hizo o no salió
+## Lo que se descartó
 
 | N.º | Propuesta | Estado | Motivo |
 |---|---|---|---|
-| 3 | Quitar peso al botón «Ver requisitos» del hero | Pendiente | Ninguna variante existente de `Button` sirve: `secondary` es marino sobre el panel marino (≈ 2,1:1 en el mejor caso; AA pide 4,5:1). Haría falta una variante de contorno claro en `DESIGN.md`. |
-| 13 | Área táctil de 44 px en los enlaces del crédito del footer | Aplicada y revertida (`a98df5c`, `5fb45ce`) | Van dentro de texto corrido: el padding abría huecos de 24 px entre líneas en móvil (hallazgo importante de `revisor-ui`) y un área invisible solaparía los toques de líneas contiguas. Para lograrlo habría que reescribir el crédito en líneas separadas. |
+| 3 | Quitar peso al botón «Ver requisitos» del hero | Descartada | Ninguna variante existente de `Button` sirve: `secondary` es marino sobre el panel marino (≈ 2,1:1 en el mejor caso; AA pide 4,5:1). Haría falta una variante de contorno claro en `DESIGN.md`. |
+| 13 | Área táctil de 44 px en los enlaces del crédito del footer | Descartada: aplicada y revertida (`a98df5c`, `5fb45ce`) | Van dentro de texto corrido: el padding abría huecos de 24 px entre líneas en móvil (hallazgo importante de `revisor-ui`) y un área invisible solaparía los toques de líneas contiguas. El crédito se retiró después del footer, al archivar el modelo 3D. |
 | 5 | Mover el encuadre del video en 1440 | Descartada | Riesgo de descuadrar un video ya renderizado; el auto se ve entero en móvil y tablet. |
 | 11 | Reducir los avisos «No somos la PNP» | Descartada | Es la protección legal del servicio. |
 | 12 | Página `/privacidad` | Fuera de este rediseño | La hará el dueño con sus datos. **Sigue dando 404** desde el footer y la FAQ. |
@@ -110,13 +110,16 @@ No se verificó: la página sin JavaScript en un navegador real, un lector de pa
 ni el contraste de la línea de precio sobre fotogramas concretos del video (el peor caso
 teórico, blanco puro detrás del panel, da 5,26:1).
 
-## Pendientes ajenos al rediseño
+## Cierre
 
-- `CLAUDE.md` decía que el verde de WhatsApp es `#25D366`; el token real
-  (`--color-whatsapp`) vale `#128c7e`.
-- El footer acredita el modelo 3D de Sketchfab, pero el hero muestra hoy un video.
-  Confirmar si el crédito sigue correspondiendo.
-- `Hero3D.astro` y `HeroVideoPanel.astro` no se montan y conservan la etiqueta antigua.
+- El modelo 3D no se usa en ninguna página (el hero es un video de stock). El hero 3D, su
+  visor y sus recursos pasaron a `archive/`, dejan de publicarse (`dist/` baja de 9,7 a
+  7,2 MB) y el crédito del modelo salió del footer; queda en `archive/README.md`.
+- Las capturas `despues/footer-*.png` ya son sin el crédito. Los altos de página de la tabla
+  se midieron antes de quitarlo: el footer es ahora unos 60 px más bajo en móvil.
+- `CLAUDE.md` describe ya el hero con video y el verde real de WhatsApp (`#128c7e`).
+- `HeroVideoPanel.astro` sigue en `src/components/` sin montarse y con la etiqueta antigua.
+- `DESIGN.md` aún menciona el slider y el «panel showroom con el auto» del hero 3D.
 
 ## Cómo medir la conversión real
 
