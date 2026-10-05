@@ -56,7 +56,7 @@ const prep = [
 		</div>
 	</div>
 
-	<div class="hero-copy container-page relative pb-8 lg:pt-24 lg:pb-6 lg:tall:pt-28 lg:tall:pb-12">
+	<div class="hero-copy container-page relative pb-4 lg:pt-24 lg:pb-6 lg:tall:pt-28 lg:tall:pb-12">
 		<!-- Panel oscuro semitransparente: asegura la lectura sobre cualquier parte del video. -->
 		<div
 			class="hero-text -mx-gutter px-gutter py-5 md:-mx-gutter-lg md:px-gutter-lg lg:mx-0 lg:w-fit lg:rounded-card lg:p-6"
@@ -99,9 +99,9 @@ const prep = [
 		</div>
 	</div>
 
-	<div
-		class="hero-card card relative mx-gutter mb-8 p-4 sm:mx-auto sm:w-full sm:max-w-md lg:absolute lg:right-8 lg:bottom-8 lg:mx-0 lg:mb-0 lg:w-80 lg:p-5"
-	>
+	<!-- Solo desde lg, flotando sobre el video. En móvil y tablet no se muestra: alargaba
+	     el hero más allá del CTA y repite lo que explican las secciones siguientes. -->
+	<div class="hero-card card hidden lg:absolute lg:right-8 lg:bottom-8 lg:block lg:w-80 lg:p-5">
 		<p class="font-heading font-semibold text-primary">Llega preparado al trámite</p>
 		<ul role="list" class="mt-3 grid gap-2 text-small text-foreground">
 			{
@@ -121,12 +121,12 @@ const prep = [
 
 <style>
 	.hero {
-		min-height: 100svh;
 		--hero-shade: var(--color-primary-deep);
 	}
 
 	/* Móvil y tablet: el video ocupa el ancho en 3:2 y su borde inferior se funde con el
-	   marino; el texto arranca sobre la pista, justo debajo de las llantas. */
+	   marino; el texto arranca sobre la pista, justo debajo de las llantas. El hero mide lo
+	   que su contenido (sin alto mínimo), para que no sobre marino bajo la línea de aviso. */
 	.hero-media {
 		aspect-ratio: 3 / 2;
 		mask-image: linear-gradient(to bottom, #000 88%, transparent);

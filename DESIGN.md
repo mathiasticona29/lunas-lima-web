@@ -124,6 +124,9 @@ Siempre con `Button.astro`.
 - `.card-featured` (borde `primary`) solo para la tarjeta destacada de precios.
 - Las tarjetas van sobre fondo `background` o sobre el panel marino. En una sección
   `card` el contenido no se mete en tarjetas: se separa con espacio o con líneas `border`.
+- La tarjeta flotante del hero («Llega preparado al trámite») existe solo desde `lg`,
+  sobre el video, abajo a la derecha. En móvil y tablet no se muestra (`hidden lg:block`):
+  ahí el hero mide lo que su contenido, sin alto mínimo, y termina tras la línea de aviso.
 - Sin tarjetas dentro de tarjetas. Sin hover de elevación en tarjetas que no son clicables.
 - Dentro de una tarjeta de dos columnas (precios), las columnas se separan con una línea
   `border` (`border-t` en móvil, `border-l` desde `md`), no con otra tarjeta.
