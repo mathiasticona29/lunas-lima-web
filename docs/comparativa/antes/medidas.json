@@ -1,0 +1,69 @@
+{
+	"commit": "5d7e3bc (v1-antes-rediseno)",
+	"fecha": "2026-10-04",
+	"lighthouseMovil": {
+		"rendimiento": 99,
+		"accesibilidad": 100,
+		"buenasPracticas": 100,
+		"seo": 100,
+		"fcp": "1.5 s",
+		"lcp": "1.7 s",
+		"tbt": "0 ms",
+		"cls": 0,
+		"pesoTransferido": "607 KiB"
+	},
+	"build": {
+		"distKB": 9724,
+		"jsInicialBytes": 53242,
+		"jsInicialGzip": 19117,
+		"cssBytes": 37315,
+		"cssGzip": 8176
+	},
+	"viewports": [
+		{
+			"viewport": "375×812",
+			"altoPagina": 9240,
+			"pantallasDeScroll": 11.4,
+			"desbordeHorizontal": false,
+			"ctaWhatsApp": 7,
+			"waPrimerPantallazo": 2,
+			"pantallasSinCta": 0,
+			"pantallasSinCtaDeSeccion": 6,
+			"tactilesPequenos": ["Saltar al contenido (1×1)"],
+			"textosMedidos": 145,
+			"textosNoMedibles": 4,
+			"contrasteBajo": [],
+			"secciones": { "hero": 1246, "por-que": 1159, "como-funciona": 1528, "requisitos": 1581, "precios": 1338, "faq": 1273, "contacto": 432 }
+		},
+		{
+			"viewport": "768×1024",
+			"altoPagina": 7113,
+			"pantallasDeScroll": 6.9,
+			"desbordeHorizontal": false,
+			"ctaWhatsApp": 7,
+			"waPrimerPantallazo": 2,
+			"pantallasSinCta": 0,
+			"pantallasSinCtaDeSeccion": 2,
+			"tactilesPequenos": ["Saltar al contenido (1×1)"],
+			"textosMedidos": 147,
+			"textosNoMedibles": 4,
+			"contrasteBajo": [],
+			"secciones": { "hero": 1232, "por-que": 734, "como-funciona": 1361, "requisitos": 1179, "precios": 841, "faq": 997, "contacto": 352 }
+		},
+		{
+			"viewport": "1440×900",
+			"altoPagina": 6560,
+			"pantallasDeScroll": 7.3,
+			"desbordeHorizontal": false,
+			"ctaWhatsApp": 7,
+			"waPrimerPantallazo": 2,
+			"pantallasSinCta": 0,
+			"pantallasSinCtaDeSeccion": 2,
+			"tactilesPequenos": ["Saltar al contenido (1×1)"],
+			"textosMedidos": 151,
+			"textosNoMedibles": 4,
+			"contrasteBajo": [],
+			"secciones": { "hero": 900, "por-que": 819, "como-funciona": 874, "requisitos": 870, "precios": 874, "faq": 1028, "contacto": 819 }
+		}
+	]
+}
